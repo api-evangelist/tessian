@@ -1,0 +1,869 @@
+openapi: 3.0.0
+info:
+  title: Tessian Anomalies Deprecated API
+  version: 1.0.1
+  x-logo:
+    url: data:image/png;base64,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
+    altText: Tessian Logo
+  description: "# About the Tessian API\nThe Tessian API provides access to your Tessian security event data and can be integrated with SIEMs and other data management tools. We offer RESTful API endpoints that return JSON objects containing the requested data.\nThe Tessian API provides access to security event data for all Tessian modules:\n\n  * <a href=\"https://www.tessian.com/defender/\"><img src=\"https://s3.eu-west-1.amazonaws.com/assets.tessian.com/email_snapshot_v2/defender_logo.png\" height=20em/></a>\n  * <a href=\"https://www.tessian.com/guardian/\"><img src=\"https://s3.eu-west-1.amazonaws.com/assets.tessian.com/email_snapshot_v2/guardian_logo.png\" height=20em/></a>\n  * <a href=\"https://www.tessian.com/enforcer/\"><img src=\"https://s3.eu-west-1.amazonaws.com/assets.tessian.com/email_snapshot_v2/enforcer_logo.png\" height=20em/></a>\n  * <a href=\"https://www.tessian.com/architect/\"><img src=\"https://s3.eu-west-1.amazonaws.com/assets.tessian.com/email_snapshot_v2/architect_logo.png\" height=20em/></a>\n\n# How to use the API\nThe API allows you to move Tessian data into your own tools or datastores, where you can visualize and interact with the data. From there, you can:\n  * Triage most important events across multiple security tools\n  * Integrate Tessian data into internal security dashboards\n  * Automate statistics and presentations for reporting purposes\n\n\nThe most common use case is to call the API on a recurring basis (e.g. once per hour or day) to retrieve all new or updated data, and send that data to your desired data tool.\nThe hostname of the API endpoint will be the same as the URL of your Tessian portal page.\n\n  * If you are a EU customer, that would be `https://your-subdomain.tessian-platform.com/...`\n  * If you are a US customer, that would be `https://your-subdomain.tessian-app.com/...`\n\n## Calling the API\nEach endpoint provides an example code snippet on how to call it. Also documented are the required and optional parameters you will need to supply to each endpoint.\n\nFor any endpoint that returns paginated results, you will need to supply a `after_checkpoint` parameter after the first call.\n\nFor example:\n\n\n  ```python\n  import requests\n\n  response = requests.get(\"https://you.tessian-platform.com/api/v1/endpoint\")\n\n  checkpoint = response.json()[\"checkpoint\"]\n\n  next_response = requests.get(\n    \"https://you.tessian-platform.com/api/v1/endpoint\",\n    params={\n      \"after_checkpoint\": checkpoint\n    }\n  )\n  ```\n\n\n## Authenticating\nIn order to authenticate and authorize the API request, you must provide an “API token”. A Tessian portal user who has the correct permissions can generate an API token by navigating to \"Integrations > Tessian API\" in the Tessian portal.\n\n### Using the Token\nOn each request, you must send the API Token in the `Authorization` HTTP header in the format `Authorization: API-Token <your-api-token>`.  Where `<your-api-token>` is the long string of characters that was generated for you in the \"API Tokens\" page of the Portal UI.\n\nExamples:\n#### Raw HTTP\n  ```http\n  GET /api/v1/endpoint HTTP/1.1\n  Host: you.tessian-platform.com\n  Authorization: API-Token <your-api-token>\n  ```\n\n#### cURL\n  ```curl\n  curl --header \"Authorization: API-Token <your-api-token>\" https://you.tessian-platform.com/api/v1/endpoint\n  ```\n\n#### Python\n  ```python\n  import requests\n\n  response = requests.get(\n    \"https://you.tessian-platform.com/api/v1/endpoint\",\n    headers={\"Authorization\": f\"API-Token {api_token}\"},\n  )\n  ```\n\n\n### Token Permissions and Lifecycle\nAn API Token has the same permissions as the user who created it. **In order to generate a valid token, the user creating the token must have \"Logs\" permissions.** If that same user is subsequently removed / has their Logs permissions revoked, the API Token's access will be automatically revoked as a security precaution. Similarly, if an API token is deleted from the token page, it will no longer be valid and any subsequent API request will fail. **The token will only ever be shown once, when it is first generated.**\n\nIf you prefer, you can create a separate \"system\" account that represents the access to the API, rather than representing a particular person. This can then be used as an API-only account, e.g. for Managed Service Providers to access the API. As with any account, the tokens created while using that account will allow access to the API until the token is deleted, the Logs permission is revoked from the account, or the account is removed.\n\n### Keeping the token safe\nAn API token allows access to your company's highly sensitive Tessian data, so treat the token the same way you would treat a password:\n\n  * Limit the number of people who have access to the token.\n  * Don't share the token over email or instant messaging applications.\n  * Delete old tokens that are no longer being used.\n  * If you think the token has been leaked, or given to someone who should not\n  have access, delete it and generate a new one.\n\n\n## Data Formats\n### Timestamps\nThe timestamp (date & time) of the email follows the [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format as Coordinated Universal Time (UTC), using (optional) microsecond precision and a zero-offset: `YYYY-MM-DDTHH:MM:SSZ` or `YYYY-MM-DDTHH:MM:SS.mmmmmmZ`. Note that this format is 24hr time.\n\nFor example, a timestamp could look like `2022-09-07T23:34:28Z`.\n\nFor inbound emails the timestamp describes the actual time that the email was sent, whereas for outbound emails it describes the time that the user (sender) _attempted_ to send the email.\n\n### Return values\nAll responses include a JSON object containing the requested data. The structure of the each return type is documented in our [OpenAPI Specification](http://assets.tessian.com/docs/openapi.json). This file documents all requests that can be made to the various endoints, as well as the expected return types. \n\nReturn types for specific requests are documented alongside the requests themselves throughout the endpoints section of this document.\n\n## General Caveats\n### Limits\nYou may receive less than `limit` items back (or even zero items), while still receiving `has_more` equal to true. Do not rely on counting the number of rows returned in order to determine whether to call the API again; instead, always look at `has_more`. Conversely, there may be times when `has_more` is true, but then you make a subsequent call and receive back zero rows (and `has_more` is false).\n\n### Future changes\nBe aware that in the future, items may acquire additional attributes, and existing attributes may acquire new values.\n### Rate limits\nRate-limiting is enabled for the API. If you receive HTTP status code 429 \"Too Many Requests\" give the API a break and try again in a few seconds.\n### Dealing with duplicate data\nThe nature of the Tessian architecture means that some elements of the data can change over time. For example, a user's response to a warning message can happen some time after an email is initially sent or received. In some cases, the API is able to return an event as soon as it is available, even if some fields are not yet available. In other cases, the Tessian algorithms need to wait for more information before events can be returned.\n\nOverall, this means that the same event is sometimes returned by the API multiple times, as new elements are added to it. Every time you call the API, it will return the events that have been modified since your previous call.\n\nIn order to deal with these duplicate rows, customers should always use only the most recent, up-to-date \"version\" of each event that was returned from the API. In other words, the data will need to be deduplicated, based on the `id` field, keeping only the `id` with the latest `updated_at` time. As an example, in Splunk, this can be done using the `dedup` command.\n\n# Questions and support\nIf you have any questions at any time we're here to help. Please email `support@tessian.com`.\n"
+servers:
+- url: https://your-domain.tessian-platform.com
+  description: For companies hosted on tessian-platform.com.
+- url: https://your-domain.tessian-app.com
+  description: For companies hosted on tessian-app.com.
+tags:
+- name: Deprecated
+  description: '**⚠️ These endpoints are marked as deprecated and will be going away soon.**
+
+
+    You should look to migrate away from using the endpoints in this section as they are no longer maintained. Timelines for removal, and migration guides are available against each endpoint.
+
+    '
+paths:
+  /reporting/triggers/v1:
+    get:
+      tags:
+      - Deprecated
+      deprecated: true
+      summary: Triggers
+      description: '**⚠️ Scheduled for removal after Jan 2023. Please migrate to [Security Events](#tag/Endpoints/operation/insights.external_api.main.get_events)**
+
+
+        This API provides a list of emails that have been flagged by one of the Tessian modules.
+
+
+        Each row of data returned by the API represents a “trigger”: an email flagged by a Tessian module.
+
+
+        Each trigger will include email details, details outlining how the user responded to the Tessian warning message (if they were shown one), and other information that will vary depending on various parameters (Inbound vs Outbound, module type, etc.).
+
+
+        For inbound emails that trigger Defender, a single email received by multiple users is likely to result in multiple rows (i.e. one row per user). For outbound emails that trigger Guardian, Enforcer, Architect or Constructor (legacy), one outbound email may trigger multiple filters, resulting in multiple rows (i.e. one row per filter triggered). We have provided a guide and accompanying queries to help deal with this complexity in the “Calculating Statistics” section below.
+
+
+        The data is returned in JSON as an array of objects. Each object will contain the information appropriate for the type of trigger (Guardian, Enforcer, Defender, Architect, Constructor).
+
+
+
+        **Important: if the data is not deduped, calculations of counts and other statistics will be inaccurate.**
+
+
+        ## Calculating statistics
+
+
+        This section documents how to compute some interesting stats from the triggers that are returned by the API, using a SQL-like language for illustration.
+
+
+        **Note that for all stats, you must first dedupe by trigger_id, as mentioned above.**
+
+
+        ### Enforcer
+
+        #### Unauthorized emails prevented
+
+        The number of emails that Tessian Enforcer has prevented from being sent by your company’s employees.
+
+
+        ```COUNT (DISTINCT message_id) WHERE module = ''enforcer'' AND unauthorized_email_prevented = ''True''```
+
+
+        #### Enforcer messages shown to users
+
+        The number of Tessian Enforcer warning messages shown to users (either via the Add-in or Gateway).
+
+
+        ```COUNT WHERE module = ''enforcer'' AND (alert_type = ''warn'' or alert_type = ''block'')```
+
+
+        #### Unauthorized email attempts
+
+        The number of emails that triggered Tessian Enforcer.
+
+
+        ```COUNT (DISTINCT message_id) WHERE module = ''enforcer''```
+
+
+        #### Sensitive unauthorized email attempts
+
+        The number of emails that triggered Tessian Enforcer that also contained sensitive information.
+
+
+        ```COUNT (DISTINCT message_id) WHERE module = ''enforcer'' AND email_is_sensitive = ''True''```
+
+
+        #### Filter triggers
+
+        The number of times any active Tessian Enforcer filters have been triggered by outbound emails.
+
+
+        ```COUNT WHERE module = ''enforcer'' GROUP BY filter_name```
+
+
+        #### Users with the most unauthorized emails detected
+
+        The number of unauthorized emails sent / attempted to be sent by each user.
+
+
+        ```COUNT (DISTINCT message_id) WHERE module = ''enforcer'' GROUP BY user```
+
+
+        ### Guardian
+
+        #### Misdirected emails prevented
+
+        The number of misdirected emails that Tessian Guardian prevented from being sent by your company’s employees.
+
+
+        ```COUNT (DISTINCT message_id) WHERE module = ''guardian'' AND misdirected_email_prevented = ''True''```
+
+
+        #### Guardian messages shown to users
+
+        The number of Tessian Guardian warning messages shown to users.
+
+
+        ```COUNT WHERE module = ''guardian'' AND (alert_type = ''warn'' or alert_type = ''block'')```
+
+
+        #### Guardian triggers
+
+        The number of times that any Tessian Guardian filters were triggered by outbound emails.
+
+
+        ```COUNT (DISTINCT message_id) WHERE module = ''guardian''```
+
+
+        #### Users with the most misdirected emails detected
+
+
+        The number of misdirected emails that were prevented from being sent by Tessian Guardian per user.
+
+
+        ```COUNT (DISTINCT message_id) WHERE module = ''guardian'' AND misdirected_email_prevented = ''True'' GROUP BY user```
+
+
+        ### Constructor
+
+        #### Filter triggers (total count)
+
+        The number of times any active constructor filters were triggered in total.
+
+
+        ```COUNT WHERE module = ''constructor''```
+
+
+        #### Filter triggers (count per filter)
+
+        The number of times each active constructor filter was triggered.
+
+
+        ```COUNT WHERE module = ''constructor'' GROUP BY filter_name```
+
+
+        ### Defender
+
+        #### Malicious emails detected
+
+
+        The total number of emails that triggered Tessian Defender and that were classified as ‘malicious’.
+
+
+        ```COUNT (DISTINCT message_id) WHERE module = ''defender'' AND threat_classification = ''malicious''```
+
+
+        #### Anomalous emails detected
+
+        The total number of emails that triggered Tessian Defender and that were classified as ‘anomalous’.
+
+
+        ```COUNT (DISTINCT message_id) WHERE module = ''defender'' AND threat_classification = ''anomalous''```
+
+
+        #### Threat type statistics
+
+        The total number of emails that triggered Tessian Defender that were classified as being a particular threat type.
+
+
+        ```COUNT (DISTINCT message_id) WHERE module = ''defender'' AND threat_types CONTAINS ''Domain Impersonation''```
+
+
+        Note: `CONTAINS` means that the value exists in the `threat_types` list. Replace ''Domain Impersonation''
+
+        with ''Display Name Impersonation'', ''Direct Spoof Impersonation'', ''Unusual Email'', ''Blacklist'', ''Account Takeover'' to calculate
+
+        these other stats. ''Unusual Email'' is semantically the same as ''Other Phishing'', which is used in other parts of the platform.
+
+
+        #### Defender warnings shown to users
+
+        The number of Tessian Defender warnings shown to users.
+
+
+        ```COUNT (DISTINCT user, message_id) WHERE module = ''defender'' AND user_interaction NOT IN (''warning_message_not_shown'', ''warning_message_not_shown_deleted'', ''silently_track'', ''defender_not_enabled'')```
+
+
+        #### Confirmed as malicious by users
+
+        The number of emails that triggered Tessian Defender and were confirmed as malicious by users clicking the “Mark as Malicious” button in the warning message.
+
+
+        ```COUNT (DISTINCT user, message_id) WHERE module = ''defender'' AND user_interaction = ''marked_as_malicious''```
+
+
+        #### Triggered emails manually deleted by users
+
+        The number of emails that triggered Tessian Defender and that were subsequently deleted by users.
+
+
+        ```COUNT (DISTINCT user, message_id) WHERE module = ''defender'' AND user_interaction = ''deleted_email''```
+
+
+        #### Marked as safe by users
+
+        The number of emails that triggered Tessian Defender but that were subsequently marked as safe by users clicking the “Mark as Safe” button in the warning message.
+
+
+        ```COUNT (DISTINCT user, message_id) WHERE module = ''defender'' AND user_interaction = ''marked_as_safe''```
+
+
+        #### Most targeted (malicious)
+
+        The number of emails that Tessian Defender classified as ‘malicious’ received by each user.
+
+
+        ```COUNT WHERE module = ''defender'' AND threat_classification = ''malicious'' GROUP BY user```
+
+
+        #### Most targeted (anomalous)
+
+        The number of emails that Tessian Defender classified as ‘anomalous’ received by each user.
+
+
+        ```COUNT WHERE module = ''defender'' AND threat_classification = ''anomalous'' GROUP BY user```
+
+        #### Most impersonated address
+
+
+        The internal addresses that Tessian Defender identified as being the most impersonated.
+
+
+        ```COUNT WHERE module = ''defender'' AND impersonated_address != '''' AND impersonation_type = ''internal'' GROUP BY impersonated_address```
+
+
+        #### Most impersonated domain
+
+        The domains that Tessian Defender identified as being the most impersonated.
+
+
+        ```COUNT WHERE module = ''defender'' AND impersonated_domain != '''' GROUP BY impersonated_domain```
+
+        '
+      parameters:
+      - in: query
+        name: start_date
+        description: 'The start of the period of interest, expressed in UTC. The API will return triggers whose `timestamp` field is on or after this date.  You may also receive a small number of triggers from just before this date.
+
+
+          Note that this parameter is needed only **once**, the first time the API is called. After that, you should send `after_checkpoint` instead.
+
+          '
+        required: false
+        schema:
+          type: string
+          format: date
+          example: '2019-11-15'
+      - in: query
+        name: after_checkpoint
+        description: 'Return only triggers that were updated after this one. At least one of ''start_date''
+
+          and ''after_checkpoint'' is required.
+
+          '
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        description: The maximum number of triggers to return.
+        required: false
+        schema:
+          type: integer
+          format: int32
+        example: 100
+      operationId: insights.external_api.main.get_triggers
+      x-codeSamples:
+      - lang: Python
+        source: "import requests\n\nurl = \"https://your-subdomain.tessian-platform.com/reporting/triggers/v1\"\n\nparameters = {\n    \"start_date\": \"2019-11-15\",\n    \"limit\": 100,\n}\n\nheaders = {\n    \"Authorization\": \"API-Token your-api-token\",\n}\n\nresponse = requests.get(\n    url,\n    headers=headers,\n    params=parameters,\n)\n"
+      responses:
+        '200':
+          description: Request was successfully processed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: The HTTP status of the response
+                  has_more:
+                    type: boolean
+                    description: True if there are more triggers that can be immediately retrieved.
+                  data:
+                    type: array
+                    description: The list of triggers.
+                    items:
+                      oneOf:
+                      - $ref: '#/components/schemas/GuardianTrigger'
+                      - $ref: '#/components/schemas/EnforcerTrigger'
+                      - $ref: '#/components/schemas/ConstructorTrigger'
+                      - $ref: '#/components/schemas/ArchitectTrigger'
+                      - $ref: '#/components/schemas/DefenderTrigger'
+                      discriminator:
+                        propertyName: module
+                        mapping:
+                          guardian: '#/components/schemas/GuardianTrigger'
+                          defender: '#/components/schemas/DefenderTrigger'
+                          enforcer: '#/components/schemas/EnforcerTrigger'
+                          constructor: '#/components/schemas/ConstructorTrigger'
+                          architect: '#/components/schemas/ArchitectTrigger'
+        '400':
+          description: There was a problem with the request
+        '401':
+          description: There was a problem with the request
+        '403':
+          description: Invalid token or API is not enabled
+        '429':
+          description: Rate limited - wait a few seconds and try again
+        '500':
+          description: Server error
+        '503':
+          description: Server error
+        '504':
+          description: Server error
+components:
+  schemas:
+    Links:
+      description: Contains URLs that are associated with this event.
+      type: object
+      properties:
+        portal_url:
+          description: The address on the portal where further information related to this event can be viewed.
+          type: string
+          nullable: true
+          format: url
+          example: https://example.tessian-platform.com/0/anomalies/916ab7bb-efa2-4b61-b7f3-7f45fb9c8f72
+      additionalProperties: false
+    ArchitectTrigger:
+      description: Represents a trigger by the Architect module
+      allOf:
+      - $ref: '#/components/schemas/OutboundTrigger'
+      - type: object
+        properties:
+          module:
+            type: string
+            description: The module name
+            enum:
+            - architect
+          triggered_keywords:
+            type: array
+            items:
+              type: string
+            description: Any keywords that were identified and subsequently triggered an Architect filter.
+            example:
+            - tornado
+            - zebra
+          justification:
+            type: string
+            description: The 'justification' text that the user entered when choosing to send the email.
+          email_is_sensitive:
+            type: boolean
+            description: True when this email contains sensitive information.
+          policy_breach_prevented:
+            type: boolean
+            description: True if Architect prevented this email from being sent.
+    Trigger:
+      type: object
+      properties:
+        module:
+          type: string
+          description: The module name
+          enum:
+          - guardian
+          - defender
+          - enforcer
+          - constructor
+          - architect
+        filter_name:
+          type: string
+          description: Name of the filter that was triggered
+          example: 'Filter #1'
+        user:
+          description: The individual user account protected by Tessian
+          type: string
+          format: email
+          example: example@example.com
+        timestamp:
+          description: 'The date and time of the email, in UTC. This is the time that the email was sent (for inbound emails) or the time that the user attempted to send it (in the case of outbound emails). For more detailed documentation and format description, refer to [Timestamp](#section/Timestamps).
+
+            '
+          type: string
+          format: date-time
+          example: '2018-02-14T17:58:55.253005Z'
+        recipients:
+          description: All recipients of the email.
+          type: array
+          items:
+            type: string
+            format: email
+          example:
+          - example2@example.com
+          - example3@example.com
+          - example4@example.com
+        to_recipients:
+          description: 'to: recipients of the email.'
+          type: array
+          items:
+            type: string
+            format: email
+          example:
+          - example2@example.com
+        cc_recipients:
+          description: 'cc: recipients of the email.'
+          type: array
+          items:
+            type: string
+          example:
+          - example3@example.com
+        bcc_recipients:
+          description: 'bcc: recipients of the email.'
+          type: array
+          items:
+            type: string
+          example:
+          - example3@example.com
+        subject:
+          description: The subject line of the email.
+          type: string
+          example: Hello, World
+        message_id:
+          description: The identifier assigned to each email
+          type: string
+          format: uuid
+          example: 916ab7bb-efa2-4b61-b7f3-7f45fb9c8f72
+        number_of_attachments:
+          type: integer
+          description: The total number of attachments in the email.
+          minimum: 0
+          example: 1
+        attachments_total_size:
+          type: number
+          format: float
+          description: The total size of all attachments, in megabytes.
+          minimum: 0
+          example: 1.23
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+          description: Details of each attachment
+        message_shown_to_user:
+          type: string
+          description: 'The Tessian warning message that was shown to the user. If ''alert_type'' is set to
+
+            ''silent'' or ''quarantine'', then this is the message that **would** have been shown to
+
+            the user, if it was set to ''warn'' or ''block''.
+
+            '
+        updated_at:
+          description: The date and time when this trigger was last modified, in UTC.
+          type: string
+          format: date-time
+          example: '2019-10-28 10:59:54.990272'
+        trigger_id:
+          type: string
+          description: 'Uniquely idenfies this trigger, across multiple updates. You should dedupe the
+
+            triggers returned by this API by their trigger_id, keeping only the last row
+
+            (by updated_at time).
+
+
+            The format of trigger_ids might change in the future. Also note that trigger_ids can
+
+            be compared for equality but can''t be used on their own to order triggers
+
+            chronologically.
+
+            '
+          example: 121555-442
+        checkpoint:
+          type: string
+          description: 'Use this value in the ''after_checkpoint'' parameter of your next API call, to get
+
+            back only triggers that have been modified after this one.
+
+
+            The format of checkpoints might change in the future. They should not be used
+
+            for comparing or ordering triggers.
+
+            '
+        links:
+          $ref: '#/components/schemas/Links'
+    EnforcerTrigger:
+      description: Represents a trigger by the Enforcer module
+      allOf:
+      - $ref: '#/components/schemas/OutboundTrigger'
+      - type: object
+        properties:
+          module:
+            type: string
+            description: The module name
+            enum:
+            - enforcer
+          unauthorised_recipients:
+            description: 'Recipients Enforcer has identified as being unauthorized, non-business contacts (third-parties, personal email addresses).
+
+              '
+            type: array
+            items:
+              type: string
+              format: email
+              example: person@example.com
+          unauthorized_email_prevented:
+            type: boolean
+            description: True if Enforcer prevented this email from being sent.
+          email_is_sensitive:
+            type: boolean
+            description: True when Enforcer has identified this email as containing sensitive information.
+          request_for_override:
+            type: boolean
+            nullable: true
+            description: True when the user requested to override the Enforcer warning and send the email.
+          justification_for_override:
+            type: string
+            description: The text that the user typed when requesting to override the Enforcer warning and send the email.
+    Attachment:
+      description: Details about an attachment
+      type: object
+      properties:
+        attachment:
+          description: Name of the attachment
+          type: string
+          example: Untitled document
+        encrypted:
+          description: Is the attachment encrypted
+          type: boolean
+    OutboundTrigger:
+      description: 'Represents a trigger for one of the outbound modules
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/Trigger'
+      - type: object
+        properties:
+          priority:
+            description: 'A heuristic value that indicates how confident Tessian Guardian is that this trigger
+
+              represents a risky event (closer to 1 represents higher confidence).
+
+              '
+            type: number
+            minimum: 0
+            maximum: 1
+            nullable: true
+          alert_type:
+            description: The type of trigger response set by the administrator.
+            type: string
+            enum:
+            - block
+            - silent
+            - warn
+            - quarantine
+          initial_response:
+            type: string
+            description: 'How the user responded to the Tessian warning message (if it was shown).
+
+              '
+          subsequent_action:
+            type: string
+            description: 'The user''s subsequent action after responding to the Tessian warning message
+
+              (if any).
+
+              '
+          changes_made:
+            type: string
+            description: 'Changes made to the email (if it was initally not sent, but subsequently sent with
+
+              changes).
+
+              '
+          final_outcome:
+            type: string
+            description: 'The final outcome of the email.
+
+              '
+          salutation_extracted:
+            type: string
+            description: The salutation used by the sender in the triggered email.
+            example: hello
+          project_identifiers:
+            type: array
+            description: Any terms present that could refer to a project / potentially sensitive information.
+            items:
+              type: string
+            example:
+            - zebra
+            - tornado
+          check_performed_by:
+            type: string
+            description: 'Whether the check was performed via the Tessian Add-in or the Tessian Gateway.
+
+              '
+            enum:
+            - Tessian Add-in
+            - Tessian Gateway
+            example: Tessian Gateway
+          tracking_id:
+            type: string
+            description: 'The value of the x-ts-tracking-id field in the email (or an empty string if none).
+
+              '
+            example: ABCD.1
+    GuardianTrigger:
+      description: Represents a trigger for the Guardian module
+      allOf:
+      - $ref: '#/components/schemas/OutboundTrigger'
+      - type: object
+        properties:
+          module:
+            type: string
+            description: The module name
+            enum:
+            - guardian
+          guardian_event_type:
+            type: string
+            description: The type of the guardian trigger event.
+            enum:
+            - misdirected_email
+            - misattached_file
+          misdirected_email_prevented:
+            type: boolean
+            description: True if Guardian prevented this email from being sent due to being flagged as misdirected.
+            example: true
+          flag_reason:
+            type: string
+            description: The reason that Guardian flagged this email as being misdirected.
+          anomalous_recipient:
+            type: string
+            description: The recipient email address that Guardian has identified as being a possible mistake.
+            example: example2@example.com
+          suggested_recipient:
+            type: string
+            description: The recipient that Guardian thinks the user should be sending the email to, based on the user's historical relationship with the suggested recipient.
+            example: example3@example.com
+          misattached_file_prevented:
+            type: boolean
+            description: True if Guardian prevented this email from being sent due to being flagged as having a misattached file.
+            example: false
+          misattached_file_reasons:
+            type: array
+            items:
+              type: string
+            description: The reasons that Guardian thinks this email has misattached files.
+          anomalous_attachments:
+            type: array
+            items:
+              type: string
+            description: The email attachment names that Guardian has identified as being misattached.
+            example:
+            - project_483_document.pdf
+    DefenderTrigger:
+      description: Represents a trigger by the Defender module
+      allOf:
+      - $ref: '#/components/schemas/Trigger'
+      - type: object
+        properties:
+          module:
+            type: string
+            description: The module name
+            enum:
+            - defender
+          threat_classification:
+            type: string
+            description: 'Defender analyzes all email communications and classifies them based on each email''s perceived danger.
+
+              The emails representing the most dangerous threats are classified as ''malicious''; other emails are
+
+              classified as ''anomalous''.
+
+              '
+            enum:
+            - malicious
+            - anomalous
+          threat_types:
+            description: 'The type of each attack detected by Defender.
+
+              ''Unusual Email'' is semantically the same as ''Other Phishing'', which is used in other parts of the platform.
+
+              '
+            type: array
+            items:
+              type: string
+              enum:
+              - Direct Spoof Impersonation
+              - Display Name Impersonation
+              - Domain Impersonation
+              - Unusual Email
+              - Blacklist
+              - Account Takeover
+          threat_details:
+            description: 'Additional information about each extracted threat. This may include information such as
+
+              the positioning of any threat within the email itself, or which domain was being impersonated.
+
+              '
+            type: array
+            items:
+              type: string
+          user_interaction:
+            type: string
+            description: 'The action the user took after seeing the Defender warning. (Action tracking is currently only available in the Tessian Outlook Add-in.)
+
+              '
+            enum:
+            - deleted_email
+            - marked_as_malicious
+            - marked_as_safe
+            - no_action
+            - warning_message_not_shown
+            - marked_as_unsure
+            - marked_as_unsure_and_deleted
+            - defender_not_enabled
+            - silently_track
+            - warning_message_not_shown_deleted
+          urls:
+            type: array
+            items:
+              type: string
+            description: The URLs extracted from the email.
+            example: http://www.example.com
+          sender_display_name_and_address:
+            type: string
+            description: The email sender's display name and address, as seen by the email's recipients.
+            example: Alice Smith <alice@example.com>
+          reply_to_address:
+            type: string
+            description: 'The reply-to address, if specified by the sender. The reply-to address is the email address to which the email will be sent to if a recipient replies to the email. The reply-to address causes the user''s reply to go to a different email address, not to the original sender.
+
+              '
+            example: bob@example.com
+          impersonation_type:
+            type: string
+            description: 'An Internal Impersonation is an impersonation of your organization''s domains or employees.
+
+              An External Impersonation is an impersonation of your external counterparties or suppliers. This field only appears
+
+              in Display Name, Domain, and Direct Spoof Impersonations.
+
+              '
+            enum:
+            - internal
+            - external
+            - ''
+          impersonated_domain:
+            type: string
+            description: 'The domain that Defender believes is being impersonated. This field only appears in certain impersonations.
+
+              '
+            example: other-example.com
+          impersonated_address:
+            type: string
+            description: 'The email address that Defender believes is being impersonated. This field only appears in certain impersonations.
+
+              '
+            example: example1@example.com
+          header:
+            type: string
+            description: 'The content of the email header. This is invisible to users, and contains information on the email''s sender,
+
+              the recipient, authentication details, and other information.
+
+              '
+          email_summary:
+            type: string
+            description: A summary of the email components that triggered the Defender filter.
+          intents:
+            type: array
+            items:
+              type: string
+              enum:
+              - wire transfer
+              - url present
+              - attachment present
+              - credential theft
+              - information theft
+              - general
+              - urgency
+              - shortened url present
+            description: 'Intents describe how the potential attacker has tried to deceive the email''s recipient.
+
+              Defender analyzes each email''s subject line and body text to determine the attacker''s intent.
+
+              '
+    ConstructorTrigger:
+      description: Represents a trigger by the Constructor module (legacy)
+      allOf:
+      - $ref: '#/components/schemas/OutboundTrigger'
+      - type: object
+        properties:
+          module:
+            type: string
+            description: The module name
+            enum:
+            - constructor
+          internal_external:
+            type: string
+            description: '* "internal" = The email was sent only to internal recipients.
+
+              * "external" = The email was sent only to external recipients.
+
+              * "both" = The email was sent both internal and external recipients.
+
+              '
+            enum:
+            - internal
+            - external
+            - both
+          triggered_recipients:
+            type: array
+            items:
+              type: string
+            description: Any recipients that were identified and subsequently triggered a Constructor filter.
+            example:
+            - example2@example.com
+            - example3@example.com
+          triggered_keywords:
+            type: array
+            items:
+              type: string
+            description: Any keywords that were identified and subsequently triggered a Constructor filter.
+            example:
+            - tornado
+            - zebra
+x-tagGroups:
+- name: Endpoints
+  tags:
+  - Events
+  - Groups
+  - Monitoring
+  - Risk
+  - Anomalies
+- name: Beta Endpoints
+  tags:
+  - Audits
+- name: Deprecated Endpoints
+  tags:
+  - Deprecated

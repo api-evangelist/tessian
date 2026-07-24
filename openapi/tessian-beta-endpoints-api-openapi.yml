@@ -1,0 +1,149 @@
+openapi: 3.0.0
+info:
+  title: Tessian Anomalies Beta Endpoints API
+  version: 1.0.1
+  x-logo:
+    url: data:image/png;base64,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
+    altText: Tessian Logo
+  description: "# About the Tessian API\nThe Tessian API provides access to your Tessian security event data and can be integrated with SIEMs and other data management tools. We offer RESTful API endpoints that return JSON objects containing the requested data.\nThe Tessian API provides access to security event data for all Tessian modules:\n\n  * <a href=\"https://www.tessian.com/defender/\"><img src=\"https://s3.eu-west-1.amazonaws.com/assets.tessian.com/email_snapshot_v2/defender_logo.png\" height=20em/></a>\n  * <a href=\"https://www.tessian.com/guardian/\"><img src=\"https://s3.eu-west-1.amazonaws.com/assets.tessian.com/email_snapshot_v2/guardian_logo.png\" height=20em/></a>\n  * <a href=\"https://www.tessian.com/enforcer/\"><img src=\"https://s3.eu-west-1.amazonaws.com/assets.tessian.com/email_snapshot_v2/enforcer_logo.png\" height=20em/></a>\n  * <a href=\"https://www.tessian.com/architect/\"><img src=\"https://s3.eu-west-1.amazonaws.com/assets.tessian.com/email_snapshot_v2/architect_logo.png\" height=20em/></a>\n\n# How to use the API\nThe API allows you to move Tessian data into your own tools or datastores, where you can visualize and interact with the data. From there, you can:\n  * Triage most important events across multiple security tools\n  * Integrate Tessian data into internal security dashboards\n  * Automate statistics and presentations for reporting purposes\n\n\nThe most common use case is to call the API on a recurring basis (e.g. once per hour or day) to retrieve all new or updated data, and send that data to your desired data tool.\nThe hostname of the API endpoint will be the same as the URL of your Tessian portal page.\n\n  * If you are a EU customer, that would be `https://your-subdomain.tessian-platform.com/...`\n  * If you are a US customer, that would be `https://your-subdomain.tessian-app.com/...`\n\n## Calling the API\nEach endpoint provides an example code snippet on how to call it. Also documented are the required and optional parameters you will need to supply to each endpoint.\n\nFor any endpoint that returns paginated results, you will need to supply a `after_checkpoint` parameter after the first call.\n\nFor example:\n\n\n  ```python\n  import requests\n\n  response = requests.get(\"https://you.tessian-platform.com/api/v1/endpoint\")\n\n  checkpoint = response.json()[\"checkpoint\"]\n\n  next_response = requests.get(\n    \"https://you.tessian-platform.com/api/v1/endpoint\",\n    params={\n      \"after_checkpoint\": checkpoint\n    }\n  )\n  ```\n\n\n## Authenticating\nIn order to authenticate and authorize the API request, you must provide an “API token”. A Tessian portal user who has the correct permissions can generate an API token by navigating to \"Integrations > Tessian API\" in the Tessian portal.\n\n### Using the Token\nOn each request, you must send the API Token in the `Authorization` HTTP header in the format `Authorization: API-Token <your-api-token>`.  Where `<your-api-token>` is the long string of characters that was generated for you in the \"API Tokens\" page of the Portal UI.\n\nExamples:\n#### Raw HTTP\n  ```http\n  GET /api/v1/endpoint HTTP/1.1\n  Host: you.tessian-platform.com\n  Authorization: API-Token <your-api-token>\n  ```\n\n#### cURL\n  ```curl\n  curl --header \"Authorization: API-Token <your-api-token>\" https://you.tessian-platform.com/api/v1/endpoint\n  ```\n\n#### Python\n  ```python\n  import requests\n\n  response = requests.get(\n    \"https://you.tessian-platform.com/api/v1/endpoint\",\n    headers={\"Authorization\": f\"API-Token {api_token}\"},\n  )\n  ```\n\n\n### Token Permissions and Lifecycle\nAn API Token has the same permissions as the user who created it. **In order to generate a valid token, the user creating the token must have \"Logs\" permissions.** If that same user is subsequently removed / has their Logs permissions revoked, the API Token's access will be automatically revoked as a security precaution. Similarly, if an API token is deleted from the token page, it will no longer be valid and any subsequent API request will fail. **The token will only ever be shown once, when it is first generated.**\n\nIf you prefer, you can create a separate \"system\" account that represents the access to the API, rather than representing a particular person. This can then be used as an API-only account, e.g. for Managed Service Providers to access the API. As with any account, the tokens created while using that account will allow access to the API until the token is deleted, the Logs permission is revoked from the account, or the account is removed.\n\n### Keeping the token safe\nAn API token allows access to your company's highly sensitive Tessian data, so treat the token the same way you would treat a password:\n\n  * Limit the number of people who have access to the token.\n  * Don't share the token over email or instant messaging applications.\n  * Delete old tokens that are no longer being used.\n  * If you think the token has been leaked, or given to someone who should not\n  have access, delete it and generate a new one.\n\n\n## Data Formats\n### Timestamps\nThe timestamp (date & time) of the email follows the [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format as Coordinated Universal Time (UTC), using (optional) microsecond precision and a zero-offset: `YYYY-MM-DDTHH:MM:SSZ` or `YYYY-MM-DDTHH:MM:SS.mmmmmmZ`. Note that this format is 24hr time.\n\nFor example, a timestamp could look like `2022-09-07T23:34:28Z`.\n\nFor inbound emails the timestamp describes the actual time that the email was sent, whereas for outbound emails it describes the time that the user (sender) _attempted_ to send the email.\n\n### Return values\nAll responses include a JSON object containing the requested data. The structure of the each return type is documented in our [OpenAPI Specification](http://assets.tessian.com/docs/openapi.json). This file documents all requests that can be made to the various endoints, as well as the expected return types. \n\nReturn types for specific requests are documented alongside the requests themselves throughout the endpoints section of this document.\n\n## General Caveats\n### Limits\nYou may receive less than `limit` items back (or even zero items), while still receiving `has_more` equal to true. Do not rely on counting the number of rows returned in order to determine whether to call the API again; instead, always look at `has_more`. Conversely, there may be times when `has_more` is true, but then you make a subsequent call and receive back zero rows (and `has_more` is false).\n\n### Future changes\nBe aware that in the future, items may acquire additional attributes, and existing attributes may acquire new values.\n### Rate limits\nRate-limiting is enabled for the API. If you receive HTTP status code 429 \"Too Many Requests\" give the API a break and try again in a few seconds.\n### Dealing with duplicate data\nThe nature of the Tessian architecture means that some elements of the data can change over time. For example, a user's response to a warning message can happen some time after an email is initially sent or received. In some cases, the API is able to return an event as soon as it is available, even if some fields are not yet available. In other cases, the Tessian algorithms need to wait for more information before events can be returned.\n\nOverall, this means that the same event is sometimes returned by the API multiple times, as new elements are added to it. Every time you call the API, it will return the events that have been modified since your previous call.\n\nIn order to deal with these duplicate rows, customers should always use only the most recent, up-to-date \"version\" of each event that was returned from the API. In other words, the data will need to be deduplicated, based on the `id` field, keeping only the `id` with the latest `updated_at` time. As an example, in Splunk, this can be done using the `dedup` command.\n\n# Questions and support\nIf you have any questions at any time we're here to help. Please email `support@tessian.com`.\n"
+servers:
+- url: https://your-domain.tessian-platform.com
+  description: For companies hosted on tessian-platform.com.
+- url: https://your-domain.tessian-app.com
+  description: For companies hosted on tessian-app.com.
+tags:
+- name: Beta Endpoints
+paths:
+  /api/v1/audits:
+    get:
+      tags:
+      - Beta Endpoints
+      summary: Audit Logs
+      description: '_⚠️ This endpoint is in Beta_
+
+
+        This endpoint provides the same information that is available on the Audit Trail page.
+
+        '
+      x-codeSamples:
+      - lang: Python
+        source: "import requests\n\nsubdomain = \"YOUR_SUBDOMAIN\"\napi_token = \"YOUR_TOKEN\"\n\nurl = f\"https://{subdomain}.tessian-platform.com/api/v1/audits\"\n\nresponse = requests.get(\n    url,\n    headers={\"Authorization\": f\"API-Token {api_token}\"},\n)\n\nprint(response.json())\n"
+      parameters:
+      - in: query
+        name: after_checkpoint
+        description: 'Return only audit entries that were created after the checkpoint. Use with the output
+
+          of the ''checkpoint'' field to iteratively retrieve all audit entries from the API
+
+          where the total exceeds the maximum query limit.
+
+          '
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        description: The maximum number of audit entries to return per page.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 1000
+          default: 1000
+        example: 100
+      operationId: insights.external_api.main.get_audits
+      responses:
+        '200':
+          description: Request was successfully processed
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - checkpoint
+                - additional_results
+                - results
+                properties:
+                  checkpoint:
+                    type: string
+                    description: A token that can be used to get more audit entries.
+                  additional_results:
+                    type: boolean
+                    description: True if there are more audit entries that can be immediately retrieved.
+                  results:
+                    type: array
+                    description: Returns the audit entries in chronological order.
+                    items:
+                      $ref: '#/components/schemas/AuditEvent'
+        '400':
+          description: There was a problem with the request
+        '401':
+          description: There was a problem with the request
+        '403':
+          description: Invalid token or API is not enabled
+        '429':
+          description: Rate limited - wait a few seconds and try again
+        '500':
+          description: Server error
+        '503':
+          description: Server error
+        '504':
+          description: Server error
+components:
+  schemas:
+    AuditEvent:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: 'The time the event took place, in UTC.
+
+            '
+        type:
+          type: string
+          description: The type of the event.
+          example: Permissions Granted
+        category:
+          type: string
+          description: 'The category this event belongs to. Logically similar events will all belong to the same category
+
+            '
+          example: User Management
+        details:
+          type: string
+          description: Human-readable description of the event.
+          example: The moon is now "full" (was "waxing gibbous")
+        user:
+          type: string
+          format: email
+          description: The email address of the user who triggered the event.
+          example: alice@example.com
+        ip:
+          type: string
+          oneOf:
+          - format: ipv4
+          - format: ipv6
+          description: The IP address of the client who triggered the event.
+          example: 1.2.3.4
+      required:
+      - timestamp
+      - type
+      - category
+      - details
+x-tagGroups:
+- name: Endpoints
+  tags:
+  - Events
+  - Groups
+  - Monitoring
+  - Risk
+  - Anomalies
+- name: Beta Endpoints
+  tags:
+  - Audits
+- name: Deprecated Endpoints
+  tags:
+  - Deprecated
