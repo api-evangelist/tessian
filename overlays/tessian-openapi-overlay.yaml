@@ -1,0 +1,26 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Tessian API
+  version: 1.0.0
+extends: openapi/tessian-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enrichment:
+      auth: authentication/tessian-authentication.yml
+      conventions: conventions/tessian-conventions.yml
+      errors: errors/tessian-problem-types.yml
+      data_model: data-model/tessian-data-model.yml
+      pagination: cursor (after_checkpoint / checkpoint / has_more)
+      note: >-
+        Tessian is now part of Proofpoint. Auth is a static API Token in the
+        Authorization header; the OpenAPI omits the securityScheme, captured
+        separately in authentication/.
+- target: $.components
+  update:
+    securitySchemes:
+      api-token:
+        type: apiKey
+        in: header
+        name: Authorization
+        description: 'Static API token in the format: Authorization: API-Token <your-api-token>'

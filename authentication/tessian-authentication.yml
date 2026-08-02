@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: searched
+source: https://developer.tessian.com/documentation/api/index.html
+docs: https://developer.tessian.com/documentation/api/index.html
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  oauth2_flows: []
+  note: >-
+    The Tessian API uses a static API Token passed in the Authorization header.
+    The OpenAPI document does not declare a components.securitySchemes entry;
+    this profile is captured from the provider's published authentication docs.
+schemes:
+- name: api-token
+  type: apiKey
+  in: header
+  header_name: Authorization
+  format: 'Authorization: API-Token <your-api-token>'
+  sources:
+  - openapi/tessian-openapi-original.json
+  description: >-
+    A Tessian portal user with "Logs" permission generates an API Token under
+    Integrations > Tessian API in the portal. The token is shown only once at
+    creation. It inherits the permissions of the creating user and is
+    automatically revoked if that user is removed or loses the Logs permission,
+    or when the token is deleted.
+token_lifecycle:
+  shown_once: true
+  inherits_user_permissions: true
+  required_permission: Logs
+  auto_revoked_when:
+  - user removed
+  - Logs permission revoked
+  - token deleted
+  system_account_supported: true

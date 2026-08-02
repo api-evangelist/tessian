@@ -1,0 +1,29 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/tessian-openapi-original.json
+skills:
+- file: tessian-export-events-to-siem.md
+  name: Export Tessian security events to a SIEM
+  api: openapi/tessian-openapi-original.json
+  operations:
+  - insights.external_api.main.get_events
+  - insights.external_api.main.get_audits
+- file: tessian-manage-groups.md
+  name: Manage Tessian address/domain groups
+  api: openapi/tessian-openapi-original.json
+  operations:
+  - insights.external_api.main.endpoint_groups_read
+  - insights.external_api.main.endpoint_group_create
+  - insights.external_api.main.endpoint_group_read
+  - insights.external_api.main.endpoint_group_update
+  - insights.external_api.main.endpoint_group_delete
+  - insights.external_api.main.endpoint_group_update_add
+  - insights.external_api.main.endpoint_group_update_remove
+- file: tessian-monitor-risk-and-anomalies.md
+  name: Monitor Tessian company risk and anomalies
+  api: openapi/tessian-openapi-original.json
+  operations:
+  - insights.external_api.main.get_company_risk
+  - insights.external_api.main.get_users
+  - insights.external_api.main.get_anomalies
+  - insights.external_api.main.get_triggers

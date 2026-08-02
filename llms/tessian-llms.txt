@@ -1,0 +1,27 @@
+# Tessian API
+
+> Tessian (now part of Proofpoint) is an AI email security platform. The Tessian API provides read access to your Tessian security event data — across the Defender, Guardian, Enforcer, Architect, and Constructor modules — for integration with SIEMs and other data-management tools. Endpoints are RESTful and return JSON. Authentication is a static API Token in the `Authorization: API-Token <token>` header. Pagination is checkpoint-based (`after_checkpoint` / `checkpoint` / `has_more`); timestamps are ISO 8601 UTC.
+
+## APIs
+- [Tessian API reference](https://developer.tessian.com/documentation/api/index.html): RESTful security-event export API (v1.0.1)
+
+## Specs
+- [OpenAPI 3.0.0](https://assets.tessian.com/docs/openapi.json): 10 paths / 13 operations / 26 schemas
+
+## Docs
+- [Developer portal](https://developer.tessian.com/): entry point (redirects to the API reference)
+- [API terms of use](https://www.proofpoint.com/us/legal/api-terms-of-use)
+
+## Endpoints
+- GET /api/v1/events: security events across modules
+- GET /reporting/anomalies/v1: detected anomalies
+- GET /api/v1/monitoring/users: user monitoring/onboarding status
+- GET /api/v1/risk/company: company risk scores
+- GET /api/v1/groups: list groups; POST creates a group
+- GET|PUT|DELETE /api/v1/groups/{id}: read/update/delete a group
+- POST /api/v1/groups/{id}/add_members, /remove_members: manage group membership
+- GET /api/v1/audits: portal audit-log events
+- GET /reporting/triggers/v1: DLP/security triggers
+
+## Support
+- Email: support@tessian.com

@@ -1,0 +1,80 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tessian-openapi-original.json
+entities:
+- name: Event
+  description: A Tessian security event; polymorphic across modules (Defender/Guardian/Architect).
+  variants:
+  - DefenderEvent
+  - GuardianEvent
+  - ArchitectEvent
+- name: BaseEmailDetails
+  description: Common email metadata; specialized as inbound or outbound.
+  variants:
+  - InboundEmailDetails
+  - OutboundEmailDetails
+- name: Anomaly
+  description: A detected anomaly record surfaced by the reporting endpoint.
+- name: UserMonitoringStatus
+  description: Onboarding/monitoring status for a user (SyncState enum).
+- name: GroupMetadata
+  description: A group of addresses/domains managed via the groups endpoints.
+- name: GroupMembers
+  description: Members of a group.
+- name: AuditEvent
+  description: Portal audit-log entry.
+- name: Trigger
+  description: A DLP/security trigger; polymorphic across modules.
+  variants:
+  - OutboundTrigger
+  - GuardianTrigger
+  - DefenderTrigger
+  - EnforcerTrigger
+  - ArchitectTrigger
+  - ConstructorTrigger
+relationships:
+- from: DefenderEvent
+  type: has_one
+  to: InboundEmailDetails
+  via: email_details
+- from: GuardianEvent
+  type: has_one
+  to: OutboundEmailDetails
+  via: email_details
+- from: ArchitectEvent
+  type: has_one
+  to: OutboundEmailDetails
+  via: email_details
+- from: InboundEmailDetails
+  type: is_a
+  to: BaseEmailDetails
+- from: OutboundEmailDetails
+  type: is_a
+  to: BaseEmailDetails
+- from: Anomaly
+  type: has_one
+  to: Links
+  via: links
+- from: GroupMetadata
+  type: has_many
+  to: GroupMembers
+  via: members
+- from: GroupMembers
+  type: has_many
+  to: AddressMember
+  via: addresses
+- from: GroupMembers
+  type: has_many
+  to: DomainMember
+  via: domains
+- from: Trigger
+  type: has_many
+  to: Attachment
+  via: attachments
+- from: Trigger
+  type: has_one
+  to: Links
+  via: links
+id_reference_note: >-
+  Events are deduplicated on `id` keeping the latest `updated_at`. Group
+  operations reference a group by path `id`. No documented id-prefix scheme.

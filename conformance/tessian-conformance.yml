@@ -1,0 +1,33 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tessian-openapi-original.json
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: Published OpenAPI 3.0.0 document at assets.tessian.com/docs/openapi.json
+- id: rest-json
+  conforms: true
+  evidence: RESTful endpoints returning application/json
+- id: iso8601-timestamps
+  conforms: true
+  evidence: All timestamps documented as ISO 8601 UTC zero-offset
+- id: cursor-pagination
+  conforms: true
+  evidence: Checkpoint-based pagination (after_checkpoint / checkpoint / has_more)
+- id: ietf-ratelimit-headers-draft
+  conforms: true
+  evidence: Docs reference draft-ietf-httpapi-ratelimit-headers and 429 responses
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 security scheme; static API-Token header auth only
+- id: openidconnect
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use plain HTTP status + description, not application/problem+json
+- id: fhir-r4
+  conforms: false
+- id: scim2
+  conforms: false
+- id: json-api
+  conforms: false

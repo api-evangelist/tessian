@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: probed
+source: live probes of Tessian hosts
+note: >-
+  No valid well-known discovery documents were found. www.tessian.com now
+  serves the Proofpoint marketing site, which returns HTTP 200 with HTML for
+  every /.well-known/ path (a soft catch-all, not real documents).
+  developer.tessian.com returns 403 (no such key) for these paths. Nothing was
+  saved as a raw file because none returned valid content.
+hosts:
+- host: https://www.tessian.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    valid: false
+    reason: HTML catch-all (Proofpoint site), not RFC 9116 text
+  - path: /.well-known/openid-configuration
+    status: 200
+    valid: false
+    reason: HTML catch-all, not OIDC JSON
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    valid: false
+    reason: HTML catch-all, not RFC 8414 JSON
+  - path: /.well-known/api-catalog
+    status: 200
+    valid: false
+    reason: HTML catch-all, not an API catalog
+- host: https://developer.tessian.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 403

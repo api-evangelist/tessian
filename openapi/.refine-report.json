@@ -1,0 +1,32 @@
+{
+  "provider": "tessian",
+  "sources": [
+    "tessian-anomalies-api-openapi.yml",
+    "tessian-audits-api-openapi.yml",
+    "tessian-beta-endpoints-api-openapi.yml",
+    "tessian-deprecated-api-openapi.yml",
+    "tessian-endpoints-api-openapi.yml",
+    "tessian-events-api-openapi.yml",
+    "tessian-groups-api-openapi.yml",
+    "tessian-monitoring-api-openapi.yml",
+    "tessian-risk-api-openapi.yml",
+    "tessian-triggers-api-openapi.yml"
+  ],
+  "outputs": [
+    "tessian-anomalies-api-openapi.yml",
+    "tessian-audits-api-openapi.yml",
+    "tessian-beta-endpoints-api-openapi.yml",
+    "tessian-deprecated-api-openapi.yml",
+    "tessian-endpoints-api-openapi.yml",
+    "tessian-events-api-openapi.yml",
+    "tessian-groups-api-openapi.yml",
+    "tessian-monitoring-api-openapi.yml",
+    "tessian-risk-api-openapi.yml",
+    "tessian-triggers-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tessian-openapi-original.json
+versioning:
+  scheme: uri-path
+  current: v1
+  spec_version: 1.0.1
+  docs: https://developer.tessian.com/documentation/api/index.html
+  note: >-
+    Endpoints are versioned in the URI path (/api/v1/...). The docs state that
+    items may gain additional attributes and existing attributes may gain new
+    values over time (additive, non-breaking evolution).
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No published deprecation policy or RFC 8594 Sunset/Deprecation header support found.
+sla:
+  url: null
+status_page: null
+deprecated_operations: []
+terms_of_service: https://www.proofpoint.com/us/legal/api-terms-of-use
+support: support@tessian.com
+notes: >-
+  Tessian was acquired by Proofpoint; www.tessian.com now redirects to
+  proofpoint.com. The developer portal and API reference remain live at
+  developer.tessian.com.

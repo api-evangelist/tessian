@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tessian-openapi-original.json
+format: http-status
+envelope:
+  note: >-
+    Errors are signaled with standard HTTP status codes and a human-readable
+    description string. No application/problem+json (RFC 9457) body is used.
+problems:
+- status: 400
+  title: There was a problem with the request
+  meaning: Malformed request or invalid parameters.
+  remediation: Check required and optional query parameters for the endpoint.
+- status: 401
+  title: There was a problem with the request
+  meaning: Missing or invalid authentication.
+  remediation: 'Supply a valid Authorization: API-Token <token> header.'
+- status: 403
+  title: Invalid token or API is not enabled
+  meaning: The token is invalid/revoked or the API is not enabled for the account.
+  remediation: Regenerate a token from a user with Logs permission and confirm the API is enabled.
+- status: 429
+  title: Rate limited - wait a few seconds and try again
+  meaning: Too many requests.
+  remediation: Back off a few seconds and retry; honor RateLimit headers.
+- status: 500
+  title: Server error
+  meaning: Unexpected server-side error.
+  remediation: Retry with backoff; contact support@tessian.com if persistent.
+- status: 503
+  title: Server error
+  meaning: Service temporarily unavailable.
+  remediation: Retry with backoff.
+- status: 504
+  title: Server error
+  meaning: Gateway timeout.
+  remediation: Retry with backoff; reduce page size if applicable.

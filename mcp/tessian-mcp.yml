@@ -1,0 +1,51 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/tessian-openapi-original.json
+note: >-
+  No official hosted/remote Tessian MCP server was found. This is a candidate
+  tool surface derived one-to-one from the OpenAPI operations, for use in
+  building an MCP wrapper over the Tessian API.
+server:
+  name: tessian
+  transport: http
+tools:
+- name: get_events
+  description: Retrieve Tessian security events across modules (paginated by checkpoint).
+  source_operation: openapi/tessian-openapi-original.json#insights.external_api.main.get_events
+- name: get_anomalies
+  description: Retrieve detected anomalies.
+  source_operation: openapi/tessian-openapi-original.json#insights.external_api.main.get_anomalies
+- name: get_users
+  description: Retrieve user monitoring/onboarding status.
+  source_operation: openapi/tessian-openapi-original.json#insights.external_api.main.get_users
+- name: get_company_risk
+  description: Retrieve company risk scores.
+  source_operation: openapi/tessian-openapi-original.json#insights.external_api.main.get_company_risk
+- name: list_groups
+  description: List address/domain groups.
+  source_operation: openapi/tessian-openapi-original.json#insights.external_api.main.endpoint_groups_read
+- name: create_group
+  description: Create a group.
+  source_operation: openapi/tessian-openapi-original.json#insights.external_api.main.endpoint_group_create
+- name: get_group
+  description: Read a single group by id.
+  source_operation: openapi/tessian-openapi-original.json#insights.external_api.main.endpoint_group_read
+- name: update_group
+  description: Update a group by id.
+  source_operation: openapi/tessian-openapi-original.json#insights.external_api.main.endpoint_group_update
+- name: delete_group
+  description: Delete a group by id.
+  source_operation: openapi/tessian-openapi-original.json#insights.external_api.main.endpoint_group_delete
+- name: add_group_members
+  description: Add members to a group.
+  source_operation: openapi/tessian-openapi-original.json#insights.external_api.main.endpoint_group_update_add
+- name: remove_group_members
+  description: Remove members from a group.
+  source_operation: openapi/tessian-openapi-original.json#insights.external_api.main.endpoint_group_update_remove
+- name: get_audits
+  description: Retrieve portal audit-log events.
+  source_operation: openapi/tessian-openapi-original.json#insights.external_api.main.get_audits
+- name: get_triggers
+  description: Retrieve DLP/security triggers.
+  source_operation: openapi/tessian-openapi-original.json#insights.external_api.main.get_triggers

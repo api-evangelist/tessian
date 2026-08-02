@@ -1,0 +1,59 @@
+generated: '2026-07-21'
+method: searched
+source: https://developer.tessian.com/documentation/api/index.html
+authentication:
+  style: api-token-header
+  header: 'Authorization: API-Token <your-api-token>'
+  ref: authentication/tessian-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    The API is read-oriented (SIEM/data export). No idempotency-key header or
+    parameter is documented; group write operations are not idempotent-keyed.
+pagination:
+  style: cursor
+  mechanism: checkpoint
+  request_params:
+  - name: after_checkpoint
+    description: Set to the `checkpoint` value returned by the previous call to fetch the next page.
+  - name: limit
+    description: Maximum number of items to return (may return fewer, or zero, while has_more is true).
+  - name: created_after
+    description: Only include records created after this ISO 8601 timestamp.
+  response_fields:
+  - checkpoint
+  - has_more
+  guidance: >-
+    Do not count returned rows to decide whether to continue; always rely on
+    the `has_more` flag. has_more may be true even when zero rows are returned.
+deduplication:
+  note: >-
+    The same event can be returned multiple times as new fields become
+    available. Deduplicate on the `id` field, keeping the row with the latest
+    `updated_at`.
+  key_field: id
+  version_field: updated_at
+timestamps:
+  format: ISO 8601 UTC (zero-offset)
+  patterns:
+  - 'YYYY-MM-DDTHH:MM:SSZ'
+  - 'YYYY-MM-DDTHH:MM:SS.mmmmmmZ'
+versioning:
+  style: uri-path
+  current: v1
+  note: URI path (/api/v1/...); some reporting endpoints carry a per-resource /v1 suffix.
+rate_limiting:
+  signaled_via_status: 429
+  draft_headers: https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/
+  guidance: On HTTP 429 (Too Many Requests), pause a few seconds and retry.
+  ref: null
+error_envelope:
+  format: plain-json
+  note: >-
+    Errors return standard HTTP status codes (400/401/403/429/500/503/504)
+    with a human-readable description; no RFC 9457 problem+json envelope.
+  ref: errors/tessian-problem-types.yml
+cross_links:
+  authentication: authentication/tessian-authentication.yml
+  errors: errors/tessian-problem-types.yml
+  lifecycle: lifecycle/tessian-lifecycle.yml

@@ -1,8 +1,27 @@
 aid: tessian
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tessian.png
 name: Tessian
-description: 'Tessian is a company surfaced as a portfolio company of accel, balderton-capital and added
-  to the API Evangelist network as a stub for enrichment. Sector: enterprise. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: >-
+  Tessian, now part of Proofpoint, is an AI-powered email security platform that
+  protects against inbound threats (phishing and impersonation), accidental data
+  loss, and deliberate data exfiltration across its Defender, Guardian, Enforcer,
+  Architect, and Constructor modules. The Tessian API is a RESTful, JSON,
+  read-oriented interface that exports security-event, anomaly, company-risk,
+  user-monitoring, audit-log, and trigger data into SIEMs and other data-management
+  tools. It authenticates with a static API token, paginates by checkpoint, and
+  returns ISO 8601 UTC timestamps.
 url: https://raw.githubusercontent.com/api-evangelist/tessian/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -13,16 +32,217 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
 - Enterprise
-apis: []
+- Email Security
+- Cybersecurity
+- Data Loss Prevention
+- SIEM
+- Security
+- Phishing
+apis:
+- aid: tessian:tessian-anomalies-api
+  name: Tessian Anomalies API
+  description: >-
+    Endpoints in this section detail anomalous user activity that has been detected by the system, where
+    anomalous activity is defined as users sending unusual numbers of sensitive emails to unauthorized
+    addresses compared to their normal behaviour.
+  humanURL: https://developer.tessian.com/documentation/api/index.html
+  baseURL: https://your-domain.tessian-platform.com
+  tags:
+  - Anomalies
+  properties:
+  - type: OpenAPI
+    url: openapi/tessian-anomalies-api-openapi.yml
+  - type: Documentation
+    url: https://developer.tessian.com/documentation/api/index.html
+  - type: APIReference
+    url: https://developer.tessian.com/documentation/api/index.html
+- aid: tessian:tessian-audits-api
+  name: Tessian Audits API
+  description: >-
+    Endpoints in this section allow you to access audit information of usage and changes made to your
+    Tessian Products.
+  humanURL: https://developer.tessian.com/documentation/api/index.html
+  baseURL: https://your-domain.tessian-platform.com
+  tags:
+  - Audits
+  properties:
+  - type: OpenAPI
+    url: openapi/tessian-audits-api-openapi.yml
+  - type: Documentation
+    url: https://developer.tessian.com/documentation/api/index.html
+  - type: APIReference
+    url: https://developer.tessian.com/documentation/api/index.html
+- aid: tessian:tessian-beta-endpoints-api
+  name: Tessian Beta Endpoints API
+  description: The Beta Endpoints API from Tessian — 1 operation(s) for beta endpoints.
+  humanURL: https://developer.tessian.com/documentation/api/index.html
+  baseURL: https://your-domain.tessian-platform.com
+  tags:
+  - Beta Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/tessian-beta-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer.tessian.com/documentation/api/index.html
+  - type: APIReference
+    url: https://developer.tessian.com/documentation/api/index.html
+- aid: tessian:tessian-deprecated-api
+  name: Tessian Deprecated API
+  description: >-
+    **⚠️ These endpoints are marked as deprecated and will be going away soon.**
+
+
+    You should look to migrate away from using the endpoints in this section as they are no longer maintained.
+    Timelines for removal, and migration guides are available against each endpoint.
+  humanURL: https://developer.tessian.com/documentation/api/index.html
+  baseURL: https://your-domain.tessian-platform.com
+  tags:
+  - Deprecated
+  properties:
+  - type: OpenAPI
+    url: openapi/tessian-deprecated-api-openapi.yml
+  - type: Documentation
+    url: https://developer.tessian.com/documentation/api/index.html
+  - type: APIReference
+    url: https://developer.tessian.com/documentation/api/index.html
+- aid: tessian:tessian-endpoints-api
+  name: Tessian Endpoints API
+  description: The Endpoints API from Tessian — 9 operation(s) for endpoints.
+  humanURL: https://developer.tessian.com/documentation/api/index.html
+  baseURL: https://your-domain.tessian-platform.com
+  tags:
+  - Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/tessian-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer.tessian.com/documentation/api/index.html
+  - type: APIReference
+    url: https://developer.tessian.com/documentation/api/index.html
+- aid: tessian:tessian-events-api
+  name: Tessian Events API
+  description: Endpoints in this section allow you to access security events from Tessian.
+  humanURL: https://developer.tessian.com/documentation/api/index.html
+  baseURL: https://your-domain.tessian-platform.com
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/tessian-events-api-openapi.yml
+  - type: Documentation
+    url: https://developer.tessian.com/documentation/api/index.html
+  - type: APIReference
+    url: https://developer.tessian.com/documentation/api/index.html
+- aid: tessian:tessian-groups-api
+  name: Tessian Groups API
+  description: >-
+    Groups are named collections of email addresses; their members may be specified either by specific
+    address, or by a wildcard including all addresses in an entire domain.
+  humanURL: https://developer.tessian.com/documentation/api/index.html
+  baseURL: https://your-domain.tessian-platform.com
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/tessian-groups-api-openapi.yml
+  - type: Documentation
+    url: https://developer.tessian.com/documentation/api/index.html
+  - type: APIReference
+    url: https://developer.tessian.com/documentation/api/index.html
+- aid: tessian:tessian-monitoring-api
+  name: Tessian Monitoring API
+  description: Endpoints in this section provide ways to monitor information in Tessian.
+  humanURL: https://developer.tessian.com/documentation/api/index.html
+  baseURL: https://your-domain.tessian-platform.com
+  tags:
+  - Monitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/tessian-monitoring-api-openapi.yml
+  - type: Documentation
+    url: https://developer.tessian.com/documentation/api/index.html
+  - type: APIReference
+    url: https://developer.tessian.com/documentation/api/index.html
+- aid: tessian:tessian-risk-api
+  name: Tessian Risk API
+  description: >-
+    Endpoints in this section expose risk drivers, which are the underlying components for the Tessian
+    combined Risk Score.
+  humanURL: https://developer.tessian.com/documentation/api/index.html
+  baseURL: https://your-domain.tessian-platform.com
+  tags:
+  - Risk
+  properties:
+  - type: OpenAPI
+    url: openapi/tessian-risk-api-openapi.yml
+  - type: Documentation
+    url: https://developer.tessian.com/documentation/api/index.html
+  - type: APIReference
+    url: https://developer.tessian.com/documentation/api/index.html
+- aid: tessian:tessian-triggers-api
+  name: Tessian Triggers API
+  description: The Triggers API from Tessian — 1 operation(s) for triggers.
+  humanURL: https://developer.tessian.com/documentation/api/index.html
+  baseURL: https://your-domain.tessian-platform.com
+  tags:
+  - Triggers
+  properties:
+  - type: OpenAPI
+    url: openapi/tessian-triggers-api-openapi.yml
+  - type: Documentation
+    url: https://developer.tessian.com/documentation/api/index.html
+  - type: APIReference
+    url: https://developer.tessian.com/documentation/api/index.html
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DeveloperPortal
+  url: https://developer.tessian.com/
+- type: Documentation
+  url: https://developer.tessian.com/documentation/api/index.html
+- type: APIReference
+  url: https://developer.tessian.com/documentation/api/index.html
+- type: Authentication
+  url: authentication/tessian-authentication.yml
+- type: Conventions
+  url: conventions/tessian-conventions.yml
+- type: ErrorCatalog
+  url: errors/tessian-problem-types.yml
+- type: Conformance
+  url: conformance/tessian-conformance.yml
+- type: DataModel
+  url: data-model/tessian-data-model.yml
+- type: Lifecycle
+  url: lifecycle/tessian-lifecycle.yml
+- type: MCPServer
+  url: mcp/tessian-mcp.yml
+- type: LLMsTxt
+  url: llms/tessian-llms.txt
+- type: Overlay
+  url: overlays/tessian-openapi-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/tessian-agentic-access.yml
+- type: DomainSecurity
+  url: security/tessian-domain-security.yml
+- type: GitHubOrganization
+  url: https://github.com/tessian
+- type: TermsOfService
+  url: https://www.proofpoint.com/us/legal/api-terms-of-use
+- type: Support
+  url: mailto:support@tessian.com
 - type: Website
-  url: http://www.tessian.com
+  url: https://www.tessian.com
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 14
+  pass: local-v1
