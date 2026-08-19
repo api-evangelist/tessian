@@ -1,0 +1,177 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessian Anomalies Groups API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-domain.tessian-platform.com/api/v1/groups",
+            "params": [
+              {
+                "name": "after_checkpoint",
+                "value": "",
+                "type": "query",
+                "description": "Use with the output of the 'checkpoint' field to iteratively retrieve all\ngroups where the total exceeds the query limit.\n"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The maximum number of groups to return per page."
+              }
+            ]
+          },
+          "docs": "Fetch a list of all groups."
+        },
+        {
+          "info": {
+            "name": "Create Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-domain.tessian-platform.com/api/v1/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a group with the supplied name.\n"
+        },
+        {
+          "info": {
+            "name": "Read Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-domain.tessian-platform.com/api/v1/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "42",
+                "type": "path",
+                "description": "The ID of the group to query."
+              },
+              {
+                "name": "after_checkpoint",
+                "value": "",
+                "type": "query",
+                "description": "Use with the output of the 'checkpoint' field to iteratively retrieve all\nmembers of the group where the total exceeds the query limit.\n"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The maximum number of group members to return per page."
+              }
+            ]
+          },
+          "docs": "Get information about a group.\n"
+        },
+        {
+          "info": {
+            "name": "Update a group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://your-domain.tessian-platform.com/api/v1/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "42",
+                "type": "path",
+                "description": "The ID of the group to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the group with the supplied information.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://your-domain.tessian-platform.com/api/v1/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "42",
+                "type": "path",
+                "description": "The ID of the group to delete."
+              }
+            ]
+          },
+          "docs": "Delete a group.\nCaveat — all deletions are final; a deleted group cannot be recovered.\n"
+        },
+        {
+          "info": {
+            "name": "Add group members",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-domain.tessian-platform.com/api/v1/groups/:id/add_members",
+            "params": [
+              {
+                "name": "id",
+                "value": "42",
+                "type": "path",
+                "description": "The ID of the group to add members to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Incremental update: the members listed in the request are added to the\ngroup's current members.\n"
+        },
+        {
+          "info": {
+            "name": "Remove group members",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-domain.tessian-platform.com/api/v1/groups/:id/remove_members",
+            "params": [
+              {
+                "name": "id",
+                "value": "42",
+                "type": "path",
+                "description": "The ID of the group to remove members from."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Incremental update: the members listed in the request are removed from\nthe group's current members.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

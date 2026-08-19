@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessian Anomalies Risk API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Risk",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Company Risks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-domain.tessian-platform.com/api/v1/risk/company",
+            "params": [
+              {
+                "name": "after_checkpoint",
+                "value": "",
+                "type": "query",
+                "description": "Use with the output of the 'checkpoint' field to iteratively retrieve all\nusers from the API where the total exceeds the maximum query limit.\n"
+              },
+              {
+                "name": "limit",
+                "value": "7",
+                "type": "query",
+                "description": "The maximum number of days of risk data to return."
+              }
+            ]
+          },
+          "docs": "This endpoint provides the same information that is available on the Human Layer Risk Hub page.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessian Anomalies API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Anomalies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Anomalies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-domain.tessian-platform.com/reporting/anomalies/v1",
+            "params": [
+              {
+                "name": "after_checkpoint",
+                "value": "",
+                "type": "query",
+                "description": "Return only anomalies that were created after this one. Use with the output of the 'checkpoint'\nfield to iteratively retrieve all anomalies from the API where the total exceeds the maximum\nquery limit.\n"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The maximum number of anomalies to return."
+              }
+            ]
+          },
+          "docs": "This endpoint provides the same information that is available on the Anomalous Activity page.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

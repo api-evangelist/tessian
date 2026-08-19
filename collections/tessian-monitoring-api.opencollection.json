@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessian Anomalies Monitoring API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-domain.tessian-platform.com/api/v1/monitoring/users",
+            "params": [
+              {
+                "name": "after_checkpoint",
+                "value": "",
+                "type": "query",
+                "description": "Use with the output of the 'checkpoint' field to iteratively retrieve all\nusers from the API where the total exceeds the maximum query limit.\n"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The maximum number of users to return."
+              }
+            ]
+          },
+          "docs": "Provides the same information that is available on the User Monitoring page.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

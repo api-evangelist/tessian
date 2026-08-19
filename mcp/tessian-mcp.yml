@@ -2,10 +2,8 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: openapi/tessian-openapi-original.json
-note: >-
-  No official hosted/remote Tessian MCP server was found. This is a candidate
-  tool surface derived one-to-one from the OpenAPI operations, for use in
-  building an MCP wrapper over the Tessian API.
+note: No official hosted/remote Tessian MCP server was found. This is a candidate tool surface derived
+  one-to-one from the OpenAPI operations, for use in building an MCP wrapper over the Tessian API.
 server:
   name: tessian
   transport: http
@@ -49,3 +47,9 @@ tools:
 - name: get_triggers
   description: Retrieve DLP/security triggers.
   source_operation: openapi/tessian-openapi-original.json#insights.external_api.main.get_triggers
+deployment:
+  mode: none
+  verified: derived
+  tools: 13
+  checked: '2026-08-12'
+  source: catalog MCP census

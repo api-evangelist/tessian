@@ -1,0 +1,314 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessian Anomalies Endpoints API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Security Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-domain.tessian-platform.com/api/v1/events",
+            "params": [
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Only include events that were created after this time."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of events to return."
+              },
+              {
+                "name": "after_checkpoint",
+                "value": "",
+                "type": "query",
+                "description": "If provided, this parameter must be set to the `checkpoint` returned by a previous request to this endpoint.  When provided, events from the previous request will not be included in the response from this request. If the new checkpoint returned by this request is used in yet another call to this endpoint events from both previous requests will not be included in the response (and so on). By making a number of consecutive requests to this endpoint where the checkpoint from the previous request is provided, clients can get all events from the Tessian platform, even when there are many more than can be returned in a single request. This process is often referred to as pagination.\n\nIf an event is updated, it will no longer be excluded from subsequent requests.\n"
+              }
+            ]
+          },
+          "docs": "This endpoint provides security events from Defender, Guardian, and Architect.\n"
+        },
+        {
+          "info": {
+            "name": "Anomalies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-domain.tessian-platform.com/reporting/anomalies/v1",
+            "params": [
+              {
+                "name": "after_checkpoint",
+                "value": "",
+                "type": "query",
+                "description": "Return only anomalies that were created after this one. Use with the output of the 'checkpoint'\nfield to iteratively retrieve all anomalies from the API where the total exceeds the maximum\nquery limit.\n"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The maximum number of anomalies to return."
+              }
+            ]
+          },
+          "docs": "This endpoint provides the same information that is available on the Anomalous Activity page.\n"
+        },
+        {
+          "info": {
+            "name": "Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-domain.tessian-platform.com/api/v1/monitoring/users",
+            "params": [
+              {
+                "name": "after_checkpoint",
+                "value": "",
+                "type": "query",
+                "description": "Use with the output of the 'checkpoint' field to iteratively retrieve all\nusers from the API where the total exceeds the maximum query limit.\n"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The maximum number of users to return."
+              }
+            ]
+          },
+          "docs": "Provides the same information that is available on the User Monitoring page.\n"
+        },
+        {
+          "info": {
+            "name": "Company Risks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-domain.tessian-platform.com/api/v1/risk/company",
+            "params": [
+              {
+                "name": "after_checkpoint",
+                "value": "",
+                "type": "query",
+                "description": "Use with the output of the 'checkpoint' field to iteratively retrieve all\nusers from the API where the total exceeds the maximum query limit.\n"
+              },
+              {
+                "name": "limit",
+                "value": "7",
+                "type": "query",
+                "description": "The maximum number of days of risk data to return."
+              }
+            ]
+          },
+          "docs": "This endpoint provides the same information that is available on the Human Layer Risk Hub page.\n"
+        },
+        {
+          "info": {
+            "name": "Get Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-domain.tessian-platform.com/api/v1/groups",
+            "params": [
+              {
+                "name": "after_checkpoint",
+                "value": "",
+                "type": "query",
+                "description": "Use with the output of the 'checkpoint' field to iteratively retrieve all\ngroups where the total exceeds the query limit.\n"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The maximum number of groups to return per page."
+              }
+            ]
+          },
+          "docs": "Fetch a list of all groups."
+        },
+        {
+          "info": {
+            "name": "Create Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-domain.tessian-platform.com/api/v1/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a group with the supplied name.\n"
+        },
+        {
+          "info": {
+            "name": "Read Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-domain.tessian-platform.com/api/v1/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "42",
+                "type": "path",
+                "description": "The ID of the group to query."
+              },
+              {
+                "name": "after_checkpoint",
+                "value": "",
+                "type": "query",
+                "description": "Use with the output of the 'checkpoint' field to iteratively retrieve all\nmembers of the group where the total exceeds the query limit.\n"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The maximum number of group members to return per page."
+              }
+            ]
+          },
+          "docs": "Get information about a group.\n"
+        },
+        {
+          "info": {
+            "name": "Update a group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://your-domain.tessian-platform.com/api/v1/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "42",
+                "type": "path",
+                "description": "The ID of the group to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the group with the supplied information.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://your-domain.tessian-platform.com/api/v1/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "42",
+                "type": "path",
+                "description": "The ID of the group to delete."
+              }
+            ]
+          },
+          "docs": "Delete a group.\nCaveat — all deletions are final; a deleted group cannot be recovered.\n"
+        },
+        {
+          "info": {
+            "name": "Add group members",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-domain.tessian-platform.com/api/v1/groups/:id/add_members",
+            "params": [
+              {
+                "name": "id",
+                "value": "42",
+                "type": "path",
+                "description": "The ID of the group to add members to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Incremental update: the members listed in the request are added to the\ngroup's current members.\n"
+        },
+        {
+          "info": {
+            "name": "Remove group members",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-domain.tessian-platform.com/api/v1/groups/:id/remove_members",
+            "params": [
+              {
+                "name": "id",
+                "value": "42",
+                "type": "path",
+                "description": "The ID of the group to remove members from."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Incremental update: the members listed in the request are removed from\nthe group's current members.\n"
+        },
+        {
+          "info": {
+            "name": "Triggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-domain.tessian-platform.com/reporting/triggers/v1",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "The start of the period of interest, expressed in UTC. The API will return triggers whose `timestamp` field is on or after this date.  You may also receive a small number of triggers from just before this date.\n\nNote that this parameter is needed only **once**, the first time the API is called. After that, you should send `after_checkpoint` instead.\n"
+              },
+              {
+                "name": "after_checkpoint",
+                "value": "",
+                "type": "query",
+                "description": "Return only triggers that were updated after this one. At least one of 'start_date'\nand 'after_checkpoint' is required.\n"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The maximum number of triggers to return."
+              }
+            ]
+          },
+          "docs": "**⚠️ Scheduled for removal after Jan 2023. Please migrate to [Security Events](#tag/Endpoints/operation/insights.external_api.main.get_events)**\n\nThis API provides a list of emails that have been flagged by one of the Tessian modules.\n\nEach row of data returned by the API represents a “trigger”: an email flagged by a Tessian module.\n\nEach trigger will include email details, details outlining how the user responded to the Tessian warning message (if they were shown one), and other information tha"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

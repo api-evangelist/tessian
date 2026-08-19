@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessian Anomalies Audits API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Audits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Audit Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-domain.tessian-platform.com/api/v1/audits",
+            "params": [
+              {
+                "name": "after_checkpoint",
+                "value": "",
+                "type": "query",
+                "description": "Return only audit entries that were created after the checkpoint. Use with the output\nof the 'checkpoint' field to iteratively retrieve all audit entries from the API\nwhere the total exceeds the maximum query limit.\n"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The maximum number of audit entries to return per page."
+              }
+            ]
+          },
+          "docs": "_⚠️ This endpoint is in Beta_\n\nThis endpoint provides the same information that is available on the Audit Trail page.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

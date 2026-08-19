@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessian Anomalies Triggers API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Triggers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Triggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-domain.tessian-platform.com/reporting/triggers/v1",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "The start of the period of interest, expressed in UTC. The API will return triggers whose `timestamp` field is on or after this date.  You may also receive a small number of triggers from just before this date.\n\nNote that this parameter is needed only **once**, the first time the API is called. After that, you should send `after_checkpoint` instead.\n"
+              },
+              {
+                "name": "after_checkpoint",
+                "value": "",
+                "type": "query",
+                "description": "Return only triggers that were updated after this one. At least one of 'start_date'\nand 'after_checkpoint' is required.\n"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The maximum number of triggers to return."
+              }
+            ]
+          },
+          "docs": "**⚠️ Scheduled for removal after Jan 2023. Please migrate to [Security Events](#tag/Endpoints/operation/insights.external_api.main.get_events)**\n\nThis API provides a list of emails that have been flagged by one of the Tessian modules.\n\nEach row of data returned by the API represents a “trigger”: an email flagged by a Tessian module.\n\nEach trigger will include email details, details outlining how the user responded to the Tessian warning message (if they were shown one), and other information tha"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
