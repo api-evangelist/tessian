@@ -114,7 +114,8 @@ apis:
   description: The Endpoints API from Tessian — 9 operation(s) for endpoints.
   humanURL: https://developer.tessian.com/documentation/api/index.html
   baseURL: https://your-domain.tessian-platform.com
-  tags:
+  tags: []
+  tags_raw:
   - Endpoints
   properties:
   - type: OpenAPI
@@ -129,6 +130,8 @@ apis:
   humanURL: https://developer.tessian.com/documentation/api/index.html
   baseURL: https://your-domain.tessian-platform.com
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -145,6 +148,8 @@ apis:
   humanURL: https://developer.tessian.com/documentation/api/index.html
   baseURL: https://your-domain.tessian-platform.com
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
