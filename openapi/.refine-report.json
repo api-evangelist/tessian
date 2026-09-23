@@ -1,32 +1,26 @@
 {
   "provider": "tessian",
   "sources": [
-    "tessian-anomalies-api-openapi.yml",
-    "tessian-audits-api-openapi.yml",
-    "tessian-beta-endpoints-api-openapi.yml",
-    "tessian-deprecated-api-openapi.yml",
-    "tessian-endpoints-api-openapi.yml",
-    "tessian-events-api-openapi.yml",
-    "tessian-groups-api-openapi.yml",
-    "tessian-monitoring-api-openapi.yml",
-    "tessian-risk-api-openapi.yml",
-    "tessian-triggers-api-openapi.yml"
+    "_original/tessian-openapi-original.json"
   ],
   "outputs": [
-    "tessian-anomalies-api-openapi.yml",
-    "tessian-audits-api-openapi.yml",
     "tessian-beta-endpoints-api-openapi.yml",
-    "tessian-deprecated-api-openapi.yml",
-    "tessian-endpoints-api-openapi.yml",
-    "tessian-events-api-openapi.yml",
-    "tessian-groups-api-openapi.yml",
-    "tessian-monitoring-api-openapi.yml",
-    "tessian-risk-api-openapi.yml",
-    "tessian-triggers-api-openapi.yml"
+    "tessian-endpoints-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "tessian-openapi-original.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "tessian-openapi-original.json: declared missing tag: Beta Endpoints",
+    "tessian-openapi-original.json: declared missing tag: Endpoints",
+    "tessian-openapi-original.json: declared missing tag: Triggers",
+    "tessian-openapi-original.json: multi-axis tagging (10 tags, 2 first tags, 2.08x duplication over 13 operations) \u2014 split on first tag, 13 operations narrowed",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "tessian-beta-endpoints-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tessian-endpoints-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
