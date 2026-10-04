@@ -847,220 +847,195 @@ paths:
           description: Server error
 components:
   schemas:
-    Links:
-      description: Contains URLs that are associated with this event.
+    BaseEmailDetails:
       type: object
+      description: Details about an email.
       properties:
-        portal_url:
-          description: The address on the portal where further information related to this event can be viewed.
+        message_id:
           type:
           - string
           - 'null'
-          format: url
-          example: https://example.tessian-platform.com/0/anomalies/916ab7bb-efa2-4b61-b7f3-7f45fb9c8f72
+          description: 'The email''s Message-ID. This field is `null` if no Message-ID was ever assigned to the email (for example if the Tessian outlook addin prevented the email from ever being sent).
+
+            '
+        tessian_id:
+          type: string
+          description: "A unique identifier assigned to the email by Tessian. Similar in concept to an email's Message-ID except it is guaranteed to always be assigned (even if the email was never sent). \n"
+        from:
+          description: The email address the email was from.
+          type: string
+          anyOf:
+          - format: email
+          - format: x.400
+        transmitter:
+          description: 'The email address that transmitted the email. In most cases this will be the same as  `from` but may differ if someone sent an email on behalf of someone else.
+
+            '
+          type: string
+          anyOf:
+          - format: email
+          - format: x.400
+        reply_to:
+          type: array
+          items:
+            type: string
+            anyOf:
+            - format: email
+            - format: x.400
+          description: 'The email''s reply-to addresses. May be empty if there are no reply-to addresses, which implies replies will be sent  to the `from` address.
+
+            '
+        recipients:
+          type: object
+          description: The recipients of the email.
+          properties:
+            to:
+              type: array
+              description: The email addresses listed in the emails `TO` field.
+              items:
+                type: string
+                anyOf:
+                - format: email
+                - format: x.400
+            cc:
+              type: array
+              description: The email addresses listed in the emails `CC` field.
+              items:
+                type: string
+                anyOf:
+                - format: email
+                - format: x.400
+            bcc:
+              type: array
+              description: The email addresses listed in the emails `BCC` field.
+              items:
+                type: string
+                anyOf:
+                - format: email
+                - format: x.400
+            all:
+              type: array
+              description: The email addresses listed in the emails `TO`, `CC` and `BCC` fields.
+              items:
+                type: string
+                anyOf:
+                - format: email
+                - format: x.400
+            count:
+              type: integer
+              description: "The total number of recipients in the email. In this context, we treat a recipient as an email address in the `TO`, `CC` or `BCC` field. Specifically, distribution lists are not expanded. \n"
+              minimum: 0
+          required:
+          - to
+          - cc
+          - bcc
+          - all
+          - count
+        subject:
+          type: string
+          description: The subject of the email.
+        attachments:
+          type: object
+          description: Details about the email attachments.
+          properties:
+            names:
+              type: array
+              description: The names of all the email attachments.
+              items:
+                type: string
+            count:
+              type: integer
+              description: The number of attachments the email has.
+              minimum: 0
+            bytes:
+              type: integer
+              description: The total size of all attachments in bytes.
+              minimum: 0
+          required:
+          - names
+          - count
+          - bytes
+      required:
+      - message_id
+      - tessian_id
+      - from
+      - transmitter
+      - reply_to
+      - recipients
+      - subject
+      - attachments
+    DomainMember:
+      type: object
       additionalProperties: false
-    UserMonitoringStatus:
-      description: How well we have been connecting with the user
-      type: string
-      enum:
-      - Good connection
-      - Connection issues
-      - Not connected for over 7 days
-      - Not connected for over 1 month
-    GroupMetadata:
-      type: object
-      description: 'Information about a group.
-
-        '
       required:
-      - name
+      - domain
       properties:
-        name:
+        domain:
           type: string
-        id:
-          type: integer
-        created_at:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        updated_at:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-    Event:
-      oneOf:
-      - $ref: '#/components/schemas/GuardianEvent'
-      - $ref: '#/components/schemas/ArchitectEvent'
-      - $ref: '#/components/schemas/DefenderEvent'
-      discriminator:
-        propertyName: type
-        mapping:
-          guardian: '#/components/schemas/GuardianEvent'
-          architect: '#/components/schemas/ArchitectEvent'
-          defender: '#/components/schemas/DefenderEvent'
-    GuardianTrigger:
-      description: Represents a trigger for the Guardian module
-      allOf:
-      - $ref: '#/components/schemas/OutboundTrigger'
-      - type: object
-        properties:
-          module:
-            type: string
-            description: The module name
-            enum:
-            - guardian
-          guardian_event_type:
-            type: string
-            description: The type of the guardian trigger event.
-            enum:
-            - misdirected_email
-            - misattached_file
-          misdirected_email_prevented:
-            type: boolean
-            description: True if Guardian prevented this email from being sent due to being flagged as misdirected.
-            example: true
-          flag_reason:
-            type: string
-            description: The reason that Guardian flagged this email as being misdirected.
-          anomalous_recipient:
-            type: string
-            description: The recipient email address that Guardian has identified as being a possible mistake.
-            example: example2@example.com
-          suggested_recipient:
-            type: string
-            description: The recipient that Guardian thinks the user should be sending the email to, based on the user's historical relationship with the suggested recipient.
-            example: example3@example.com
-          misattached_file_prevented:
-            type: boolean
-            description: True if Guardian prevented this email from being sent due to being flagged as having a misattached file.
-            example: false
-          misattached_file_reasons:
-            type: array
-            items:
-              type: string
-            description: The reasons that Guardian thinks this email has misattached files.
-          anomalous_attachments:
-            type: array
-            items:
-              type: string
-            description: The email attachment names that Guardian has identified as being misattached.
-            example:
-            - project_483_document.pdf
-    ScoresDatapoint:
-      description: risk drivers
-      type: object
-      required:
-      - timestamp
-      - total_score
-      - phishing_score
-      - exfiltration_score
-      - accidental_data_loss_score
-      - data_sensitivity_score
-      - security_awareness_score
-      properties:
-        timestamp:
-          type: string
-          format: date
-          description: Timestamp of the datapoint.
-        total_score:
-          type: number
-          description: Overall risk score.
-          format: float
-          minimum: 1
-          maximum: 100
-        phishing_score:
-          type: number
-          description: 'The risk of employees being tricked by phishing attacks leading to business email compromise, credential theft, data loss, or malware.
-
-            '
-          format: float
-          minimum: 1
-          maximum: 100
-        exfiltration_score:
-          type: number
-          description: 'The risk of employees exfiltrating sensitive data to non-business accounts
-
-            outside of the organization.
-
-            '
-          format: float
-          minimum: 1
-          maximum: 100
-        accidental_data_loss_score:
-          type: number
-          description: 'The risk of employees accidentally leaking sensitive data outside of the organization.
-
-            '
-          format: float
-          minimum: 1
-          maximum: 100
-        data_sensitivity_score:
-          type: number
-          description: 'The risk associated with the sensitivity and volume of data shared by employees
-
-            outside the organization.
-
-            '
-          format: float
-          minimum: 1
-          maximum: 100
-        security_awareness_score:
-          type: number
-          description: 'The risk associated with employee security awareness, which includes employee engagement with security warnings, number of security warnings and number of exfiltration attempts.
-
-            '
-          format: float
-          minimum: 1
-          maximum: 100
-    ArchitectEvent:
+          pattern: ^@.+
+    GuardianEvent:
       allOf:
       - $ref: '#/components/schemas/BaseEvent'
       - $ref: '#/components/schemas/OutboundEmailDetails'
       - type: object
         properties:
-          architect_details:
+          guardian_details:
             type: object
-            description: Details about the Architect trigger.
+            description: Details about the Guardian trigger.
             properties:
-              triggered_policy_ids:
+              triggered_filter_ids:
                 type: array
-                minItems: 1
-                description: The IDs of all the architect policies that triggered.
+                description: The IDs of all the Guardian filters that triggered.
                 items:
                   type: string
-              triggered_policy_names:
+              type:
+                type: string
+                enum:
+                - MISDIRECTED_EMAIL
+                - MISATTACHED_FILE
+                description: The type of Guardian event.
+              triggered_filter_names:
                 type: array
-                minItems: 1
-                description: 'The names of all the architect policies (at the time the event was created) that triggered.
-
-                  '
-                items:
-                  type: string
-              triggered_logic_types:
-                type: array
-                minItems: 1
-                description: 'The types of conditions and exceptions that triggered across all architect policies. If multiple conditions or exceptions of the same type triggered, the type is only listed once here.
+                description: 'The names of all of the Guardian filters that triggered (at the time the event was retrieved).
 
                   '
                 items:
                   type: string
               breach_prevented:
-                type:
-                - boolean
-                - 'null'
-                description: 'True if Architect prevented this email from being sent. `null` if it has not yet been determined.
+                type: boolean
+                description: True if Guardian prevented this email from being sent.
+              anomalous_recipients:
+                type: array
+                items:
+                  type: string
+                  anyOf:
+                  - format: email
+                  - format: x.400
+                description: "The recipient email addresses that Guardian has identified as being possible mistakes. \n"
+              suggested_recipients:
+                type: array
+                items:
+                  type: string
+                  anyOf:
+                  - format: email
+                  - format: x.400
+                description: 'The email addresses that Guardian thinks the user should be sending the email to.
 
                   '
+              anomalous_attachments:
+                type: array
+                description: The name(s) of the email attachment(s) Guardian identified as misattached.
+                items:
+                  type: string
               final_outcome:
                 type:
                 - string
                 - 'null'
-                description: 'The final outcome of the email. `null` if it has not yet been determined.
+                description: 'The final outcome of the email or `null` if the final outcome is not yet known.
 
                   '
                 enum:
+                - null
                 - NOT_SENT
                 - SENT_WITH_CHANGES
                 - SENT_WITHOUT_CHANGES
@@ -1074,9 +1049,6 @@ components:
                   enum:
                   - SEND
                   - DO_NOT_SEND
-              is_sensitive:
-                type: boolean
-                description: Indicates if the email is considered sensitive.
               justifications:
                 type: array
                 description: Any justifications the user wrote when choosing to send the email.
@@ -1088,62 +1060,53 @@ components:
 
                   '
             required:
-            - triggered_policy_ids
-            - triggered_policy_names
-            - triggered_logic_types
+            - triggered_filter_ids
+            - type
+            - triggered_filter_names
             - breach_prevented
+            - anomalous_recipients
+            - suggested_recipients
+            - anomalous_attachments
             - final_outcome
             - user_responses
-            - is_sensitive
             - justifications
             - user_shown_message
         required:
-        - architect_details
-    GroupMembers:
-      description: 'Input members data for adding/removing members from group,
+        - guardian_details
+    EnforcerTrigger:
+      description: Represents a trigger by the Enforcer module
+      allOf:
+      - $ref: '#/components/schemas/OutboundTrigger'
+      - type: object
+        properties:
+          module:
+            type: string
+            description: The module name
+            enum:
+            - enforcer
+          unauthorised_recipients:
+            description: 'Recipients Enforcer has identified as being unauthorized, non-business contacts (third-parties, personal email addresses).
 
-        expects one of `address` or `domain`
-
-        '
-      type: array
-      minItems: 1
-      maxItems: 100
-      items:
-        oneOf:
-        - $ref: '#/components/schemas/AddressMember'
-        - $ref: '#/components/schemas/DomainMember'
-    BaseEvent:
-      type: object
-      description: Properties that all events have.
-      properties:
-        id:
-          type: string
-          description: A unique identifier for the event.
-        type:
-          type: string
-          description: The type of event.
-        created_at:
-          type: string
-          format: date-time
-          description: When the event was created in UTC.
-        updated_at:
-          type: string
-          format: date-time
-          description: When the event was last updated in UTC. Creation is counted as an update.
-        portal_link:
-          type:
-          - string
-          - 'null'
-          format: url
-          description: 'A HTTP link to the Tessian portal where further information about to this event can be viewed.
-
-            '
-      required:
-      - id
-      - type
-      - created_at
-      - updated_at
-      - portal_link
+              '
+            type: array
+            items:
+              type: string
+              format: email
+              example: person@example.com
+          unauthorized_email_prevented:
+            type: boolean
+            description: True if Enforcer prevented this email from being sent.
+          email_is_sensitive:
+            type: boolean
+            description: True when Enforcer has identified this email as containing sensitive information.
+          request_for_override:
+            type:
+            - boolean
+            - 'null'
+            description: True when the user requested to override the Enforcer warning and send the email.
+          justification_for_override:
+            type: string
+            description: The text that the user typed when requesting to override the Enforcer warning and send the email.
     DefenderEvent:
       allOf:
       - $ref: '#/components/schemas/BaseEvent'
@@ -1306,69 +1269,281 @@ components:
             - impersonated_address
         required:
         - defender_details
-    GuardianEvent:
+    ScoresDatapoint:
+      description: risk drivers
+      type: object
+      required:
+      - timestamp
+      - total_score
+      - phishing_score
+      - exfiltration_score
+      - accidental_data_loss_score
+      - data_sensitivity_score
+      - security_awareness_score
+      properties:
+        timestamp:
+          type: string
+          format: date
+          description: Timestamp of the datapoint.
+        total_score:
+          type: number
+          description: Overall risk score.
+          format: float
+          minimum: 1
+          maximum: 100
+        phishing_score:
+          type: number
+          description: 'The risk of employees being tricked by phishing attacks leading to business email compromise, credential theft, data loss, or malware.
+
+            '
+          format: float
+          minimum: 1
+          maximum: 100
+        exfiltration_score:
+          type: number
+          description: 'The risk of employees exfiltrating sensitive data to non-business accounts
+
+            outside of the organization.
+
+            '
+          format: float
+          minimum: 1
+          maximum: 100
+        accidental_data_loss_score:
+          type: number
+          description: 'The risk of employees accidentally leaking sensitive data outside of the organization.
+
+            '
+          format: float
+          minimum: 1
+          maximum: 100
+        data_sensitivity_score:
+          type: number
+          description: 'The risk associated with the sensitivity and volume of data shared by employees
+
+            outside the organization.
+
+            '
+          format: float
+          minimum: 1
+          maximum: 100
+        security_awareness_score:
+          type: number
+          description: 'The risk associated with employee security awareness, which includes employee engagement with security warnings, number of security warnings and number of exfiltration attempts.
+
+            '
+          format: float
+          minimum: 1
+          maximum: 100
+    UserMonitoringStatus:
+      description: How well we have been connecting with the user
+      type: string
+      enum:
+      - Good connection
+      - Connection issues
+      - Not connected for over 7 days
+      - Not connected for over 1 month
+    Attachment:
+      description: Details about an attachment
+      type: object
+      properties:
+        attachment:
+          description: Name of the attachment
+          type: string
+          example: Untitled document
+        encrypted:
+          description: Is the attachment encrypted
+          type: boolean
+    DefenderTrigger:
+      description: Represents a trigger by the Defender module
+      allOf:
+      - $ref: '#/components/schemas/Trigger'
+      - type: object
+        properties:
+          module:
+            type: string
+            description: The module name
+            enum:
+            - defender
+          threat_classification:
+            type: string
+            description: 'Defender analyzes all email communications and classifies them based on each email''s perceived danger.
+
+              The emails representing the most dangerous threats are classified as ''malicious''; other emails are
+
+              classified as ''anomalous''.
+
+              '
+            enum:
+            - malicious
+            - anomalous
+          threat_types:
+            description: 'The type of each attack detected by Defender.
+
+              ''Unusual Email'' is semantically the same as ''Other Phishing'', which is used in other parts of the platform.
+
+              '
+            type: array
+            items:
+              type: string
+              enum:
+              - Direct Spoof Impersonation
+              - Display Name Impersonation
+              - Domain Impersonation
+              - Unusual Email
+              - Blacklist
+              - Account Takeover
+          threat_details:
+            description: 'Additional information about each extracted threat. This may include information such as
+
+              the positioning of any threat within the email itself, or which domain was being impersonated.
+
+              '
+            type: array
+            items:
+              type: string
+          user_interaction:
+            type: string
+            description: 'The action the user took after seeing the Defender warning. (Action tracking is currently only available in the Tessian Outlook Add-in.)
+
+              '
+            enum:
+            - deleted_email
+            - marked_as_malicious
+            - marked_as_safe
+            - no_action
+            - warning_message_not_shown
+            - marked_as_unsure
+            - marked_as_unsure_and_deleted
+            - defender_not_enabled
+            - silently_track
+            - warning_message_not_shown_deleted
+          urls:
+            type: array
+            items:
+              type: string
+            description: The URLs extracted from the email.
+            example: http://www.example.com
+          sender_display_name_and_address:
+            type: string
+            description: The email sender's display name and address, as seen by the email's recipients.
+            example: Alice Smith <alice@example.com>
+          reply_to_address:
+            type: string
+            description: 'The reply-to address, if specified by the sender. The reply-to address is the email address to which the email will be sent to if a recipient replies to the email. The reply-to address causes the user''s reply to go to a different email address, not to the original sender.
+
+              '
+            example: bob@example.com
+          impersonation_type:
+            type: string
+            description: 'An Internal Impersonation is an impersonation of your organization''s domains or employees.
+
+              An External Impersonation is an impersonation of your external counterparties or suppliers. This field only appears
+
+              in Display Name, Domain, and Direct Spoof Impersonations.
+
+              '
+            enum:
+            - internal
+            - external
+            - ''
+          impersonated_domain:
+            type: string
+            description: 'The domain that Defender believes is being impersonated. This field only appears in certain impersonations.
+
+              '
+            example: other-example.com
+          impersonated_address:
+            type: string
+            description: 'The email address that Defender believes is being impersonated. This field only appears in certain impersonations.
+
+              '
+            example: example1@example.com
+          header:
+            type: string
+            description: 'The content of the email header. This is invisible to users, and contains information on the email''s sender,
+
+              the recipient, authentication details, and other information.
+
+              '
+          email_summary:
+            type: string
+            description: A summary of the email components that triggered the Defender filter.
+          intents:
+            type: array
+            items:
+              type: string
+              enum:
+              - wire transfer
+              - url present
+              - attachment present
+              - credential theft
+              - information theft
+              - general
+              - urgency
+              - shortened url present
+            description: 'Intents describe how the potential attacker has tried to deceive the email''s recipient.
+
+              Defender analyzes each email''s subject line and body text to determine the attacker''s intent.
+
+              '
+    AddressMember:
+      type: object
+      additionalProperties: false
+      required:
+      - address
+      properties:
+        address:
+          type: string
+          format: email
+          pattern: ^(?!@).+
+    ArchitectEvent:
       allOf:
       - $ref: '#/components/schemas/BaseEvent'
       - $ref: '#/components/schemas/OutboundEmailDetails'
       - type: object
         properties:
-          guardian_details:
+          architect_details:
             type: object
-            description: Details about the Guardian trigger.
+            description: Details about the Architect trigger.
             properties:
-              triggered_filter_ids:
+              triggered_policy_ids:
                 type: array
-                description: The IDs of all the Guardian filters that triggered.
+                minItems: 1
+                description: The IDs of all the architect policies that triggered.
                 items:
                   type: string
-              type:
-                type: string
-                enum:
-                - MISDIRECTED_EMAIL
-                - MISATTACHED_FILE
-                description: The type of Guardian event.
-              triggered_filter_names:
+              triggered_policy_names:
                 type: array
-                description: 'The names of all of the Guardian filters that triggered (at the time the event was retrieved).
+                minItems: 1
+                description: 'The names of all the architect policies (at the time the event was created) that triggered.
+
+                  '
+                items:
+                  type: string
+              triggered_logic_types:
+                type: array
+                minItems: 1
+                description: 'The types of conditions and exceptions that triggered across all architect policies. If multiple conditions or exceptions of the same type triggered, the type is only listed once here.
 
                   '
                 items:
                   type: string
               breach_prevented:
-                type: boolean
-                description: True if Guardian prevented this email from being sent.
-              anomalous_recipients:
-                type: array
-                items:
-                  type: string
-                  anyOf:
-                  - format: email
-                  - format: x.400
-                description: "The recipient email addresses that Guardian has identified as being possible mistakes. \n"
-              suggested_recipients:
-                type: array
-                items:
-                  type: string
-                  anyOf:
-                  - format: email
-                  - format: x.400
-                description: 'The email addresses that Guardian thinks the user should be sending the email to.
+                type:
+                - boolean
+                - 'null'
+                description: 'True if Architect prevented this email from being sent. `null` if it has not yet been determined.
 
                   '
-              anomalous_attachments:
-                type: array
-                description: The name(s) of the email attachment(s) Guardian identified as misattached.
-                items:
-                  type: string
               final_outcome:
                 type:
                 - string
                 - 'null'
-                description: 'The final outcome of the email or `null` if the final outcome is not yet known.
+                description: 'The final outcome of the email. `null` if it has not yet been determined.
 
                   '
                 enum:
-                - null
                 - NOT_SENT
                 - SENT_WITH_CHANGES
                 - SENT_WITHOUT_CHANGES
@@ -1382,6 +1557,9 @@ components:
                   enum:
                   - SEND
                   - DO_NOT_SEND
+              is_sensitive:
+                type: boolean
+                description: Indicates if the email is considered sensitive.
               justifications:
                 type: array
                 description: Any justifications the user wrote when choosing to send the email.
@@ -1393,70 +1571,17 @@ components:
 
                   '
             required:
-            - triggered_filter_ids
-            - type
-            - triggered_filter_names
+            - triggered_policy_ids
+            - triggered_policy_names
+            - triggered_logic_types
             - breach_prevented
-            - anomalous_recipients
-            - suggested_recipients
-            - anomalous_attachments
             - final_outcome
             - user_responses
+            - is_sensitive
             - justifications
             - user_shown_message
         required:
-        - guardian_details
-    Attachment:
-      description: Details about an attachment
-      type: object
-      properties:
-        attachment:
-          description: Name of the attachment
-          type: string
-          example: Untitled document
-        encrypted:
-          description: Is the attachment encrypted
-          type: boolean
-    ConstructorTrigger:
-      description: Represents a trigger by the Constructor module (legacy)
-      allOf:
-      - $ref: '#/components/schemas/OutboundTrigger'
-      - type: object
-        properties:
-          module:
-            type: string
-            description: The module name
-            enum:
-            - constructor
-          internal_external:
-            type: string
-            description: '* "internal" = The email was sent only to internal recipients.
-
-              * "external" = The email was sent only to external recipients.
-
-              * "both" = The email was sent both internal and external recipients.
-
-              '
-            enum:
-            - internal
-            - external
-            - both
-          triggered_recipients:
-            type: array
-            items:
-              type: string
-            description: Any recipients that were identified and subsequently triggered a Constructor filter.
-            example:
-            - example2@example.com
-            - example3@example.com
-          triggered_keywords:
-            type: array
-            items:
-              type: string
-            description: Any keywords that were identified and subsequently triggered a Constructor filter.
-            example:
-            - tornado
-            - zebra
+        - architect_details
     OutboundTrigger:
       description: 'Represents a trigger for one of the outbound modules
 
@@ -1665,150 +1790,6 @@ components:
             '
         links:
           $ref: '#/components/schemas/Links'
-    BaseEmailDetails:
-      type: object
-      description: Details about an email.
-      properties:
-        message_id:
-          type:
-          - string
-          - 'null'
-          description: 'The email''s Message-ID. This field is `null` if no Message-ID was ever assigned to the email (for example if the Tessian outlook addin prevented the email from ever being sent).
-
-            '
-        tessian_id:
-          type: string
-          description: "A unique identifier assigned to the email by Tessian. Similar in concept to an email's Message-ID except it is guaranteed to always be assigned (even if the email was never sent). \n"
-        from:
-          description: The email address the email was from.
-          type: string
-          anyOf:
-          - format: email
-          - format: x.400
-        transmitter:
-          description: 'The email address that transmitted the email. In most cases this will be the same as  `from` but may differ if someone sent an email on behalf of someone else.
-
-            '
-          type: string
-          anyOf:
-          - format: email
-          - format: x.400
-        reply_to:
-          type: array
-          items:
-            type: string
-            anyOf:
-            - format: email
-            - format: x.400
-          description: 'The email''s reply-to addresses. May be empty if there are no reply-to addresses, which implies replies will be sent  to the `from` address.
-
-            '
-        recipients:
-          type: object
-          description: The recipients of the email.
-          properties:
-            to:
-              type: array
-              description: The email addresses listed in the emails `TO` field.
-              items:
-                type: string
-                anyOf:
-                - format: email
-                - format: x.400
-            cc:
-              type: array
-              description: The email addresses listed in the emails `CC` field.
-              items:
-                type: string
-                anyOf:
-                - format: email
-                - format: x.400
-            bcc:
-              type: array
-              description: The email addresses listed in the emails `BCC` field.
-              items:
-                type: string
-                anyOf:
-                - format: email
-                - format: x.400
-            all:
-              type: array
-              description: The email addresses listed in the emails `TO`, `CC` and `BCC` fields.
-              items:
-                type: string
-                anyOf:
-                - format: email
-                - format: x.400
-            count:
-              type: integer
-              description: "The total number of recipients in the email. In this context, we treat a recipient as an email address in the `TO`, `CC` or `BCC` field. Specifically, distribution lists are not expanded. \n"
-              minimum: 0
-          required:
-          - to
-          - cc
-          - bcc
-          - all
-          - count
-        subject:
-          type: string
-          description: The subject of the email.
-        attachments:
-          type: object
-          description: Details about the email attachments.
-          properties:
-            names:
-              type: array
-              description: The names of all the email attachments.
-              items:
-                type: string
-            count:
-              type: integer
-              description: The number of attachments the email has.
-              minimum: 0
-            bytes:
-              type: integer
-              description: The total size of all attachments in bytes.
-              minimum: 0
-          required:
-          - names
-          - count
-          - bytes
-      required:
-      - message_id
-      - tessian_id
-      - from
-      - transmitter
-      - reply_to
-      - recipients
-      - subject
-      - attachments
-    OutboundEmailDetails:
-      type: object
-      properties:
-        outbound_email_details:
-          allOf:
-          - type: object
-            description: Details about an outbound email.
-            properties:
-              send_time:
-                type: string
-                format: date-time
-                description: The time that the email was sent or a send attempt was made in UTC.
-              tessian_action:
-                type: string
-                enum:
-                - WARN
-                - BLOCK
-                - SILENTLY_TRACK
-                description: 'The action Tessian took when the user tried to send the email. If multiple modules triggered, the action might be the result of another module (i.e. not the module described by this event).
-
-                  '
-            required:
-            - send_time
-            - tessian_action
-          - $ref: '#/components/schemas/BaseEmailDetails'
-      required:
-      - outbound_email_details
     SyncState:
       description: How far along in the onboarding process the user is
       type: string
@@ -1817,141 +1798,19 @@ components:
       - Onboarding
       - Queued
       - Out of date
-    DefenderTrigger:
-      description: Represents a trigger by the Defender module
-      allOf:
-      - $ref: '#/components/schemas/Trigger'
-      - type: object
-        properties:
-          module:
-            type: string
-            description: The module name
-            enum:
-            - defender
-          threat_classification:
-            type: string
-            description: 'Defender analyzes all email communications and classifies them based on each email''s perceived danger.
-
-              The emails representing the most dangerous threats are classified as ''malicious''; other emails are
-
-              classified as ''anomalous''.
-
-              '
-            enum:
-            - malicious
-            - anomalous
-          threat_types:
-            description: 'The type of each attack detected by Defender.
-
-              ''Unusual Email'' is semantically the same as ''Other Phishing'', which is used in other parts of the platform.
-
-              '
-            type: array
-            items:
-              type: string
-              enum:
-              - Direct Spoof Impersonation
-              - Display Name Impersonation
-              - Domain Impersonation
-              - Unusual Email
-              - Blacklist
-              - Account Takeover
-          threat_details:
-            description: 'Additional information about each extracted threat. This may include information such as
-
-              the positioning of any threat within the email itself, or which domain was being impersonated.
-
-              '
-            type: array
-            items:
-              type: string
-          user_interaction:
-            type: string
-            description: 'The action the user took after seeing the Defender warning. (Action tracking is currently only available in the Tessian Outlook Add-in.)
-
-              '
-            enum:
-            - deleted_email
-            - marked_as_malicious
-            - marked_as_safe
-            - no_action
-            - warning_message_not_shown
-            - marked_as_unsure
-            - marked_as_unsure_and_deleted
-            - defender_not_enabled
-            - silently_track
-            - warning_message_not_shown_deleted
-          urls:
-            type: array
-            items:
-              type: string
-            description: The URLs extracted from the email.
-            example: http://www.example.com
-          sender_display_name_and_address:
-            type: string
-            description: The email sender's display name and address, as seen by the email's recipients.
-            example: Alice Smith <alice@example.com>
-          reply_to_address:
-            type: string
-            description: 'The reply-to address, if specified by the sender. The reply-to address is the email address to which the email will be sent to if a recipient replies to the email. The reply-to address causes the user''s reply to go to a different email address, not to the original sender.
-
-              '
-            example: bob@example.com
-          impersonation_type:
-            type: string
-            description: 'An Internal Impersonation is an impersonation of your organization''s domains or employees.
-
-              An External Impersonation is an impersonation of your external counterparties or suppliers. This field only appears
-
-              in Display Name, Domain, and Direct Spoof Impersonations.
-
-              '
-            enum:
-            - internal
-            - external
-            - ''
-          impersonated_domain:
-            type: string
-            description: 'The domain that Defender believes is being impersonated. This field only appears in certain impersonations.
-
-              '
-            example: other-example.com
-          impersonated_address:
-            type: string
-            description: 'The email address that Defender believes is being impersonated. This field only appears in certain impersonations.
-
-              '
-            example: example1@example.com
-          header:
-            type: string
-            description: 'The content of the email header. This is invisible to users, and contains information on the email''s sender,
-
-              the recipient, authentication details, and other information.
-
-              '
-          email_summary:
-            type: string
-            description: A summary of the email components that triggered the Defender filter.
-          intents:
-            type: array
-            items:
-              type: string
-              enum:
-              - wire transfer
-              - url present
-              - attachment present
-              - credential theft
-              - information theft
-              - general
-              - urgency
-              - shortened url present
-            description: 'Intents describe how the potential attacker has tried to deceive the email''s recipient.
-
-              Defender analyzes each email''s subject line and body text to determine the attacker''s intent.
-
-              '
-    EnforcerTrigger:
-      description: Represents a trigger by the Enforcer module
+    Event:
+      oneOf:
+      - $ref: '#/components/schemas/GuardianEvent'
+      - $ref: '#/components/schemas/ArchitectEvent'
+      - $ref: '#/components/schemas/DefenderEvent'
+      discriminator:
+        propertyName: type
+        mapping:
+          guardian: '#/components/schemas/GuardianEvent'
+          architect: '#/components/schemas/ArchitectEvent'
+          defender: '#/components/schemas/DefenderEvent'
+    ConstructorTrigger:
+      description: Represents a trigger by the Constructor module (legacy)
       allOf:
       - $ref: '#/components/schemas/OutboundTrigger'
       - type: object
@@ -1960,30 +1819,36 @@ components:
             type: string
             description: The module name
             enum:
-            - enforcer
-          unauthorised_recipients:
-            description: 'Recipients Enforcer has identified as being unauthorized, non-business contacts (third-parties, personal email addresses).
+            - constructor
+          internal_external:
+            type: string
+            description: '* "internal" = The email was sent only to internal recipients.
+
+              * "external" = The email was sent only to external recipients.
+
+              * "both" = The email was sent both internal and external recipients.
 
               '
+            enum:
+            - internal
+            - external
+            - both
+          triggered_recipients:
             type: array
             items:
               type: string
-              format: email
-              example: person@example.com
-          unauthorized_email_prevented:
-            type: boolean
-            description: True if Enforcer prevented this email from being sent.
-          email_is_sensitive:
-            type: boolean
-            description: True when Enforcer has identified this email as containing sensitive information.
-          request_for_override:
-            type:
-            - boolean
-            - 'null'
-            description: True when the user requested to override the Enforcer warning and send the email.
-          justification_for_override:
-            type: string
-            description: The text that the user typed when requesting to override the Enforcer warning and send the email.
+            description: Any recipients that were identified and subsequently triggered a Constructor filter.
+            example:
+            - example2@example.com
+            - example3@example.com
+          triggered_keywords:
+            type: array
+            items:
+              type: string
+            description: Any keywords that were identified and subsequently triggered a Constructor filter.
+            example:
+            - tornado
+            - zebra
     ArchitectTrigger:
       description: Represents a trigger by the Architect module
       allOf:
@@ -2012,48 +1877,55 @@ components:
           policy_breach_prevented:
             type: boolean
             description: True if Architect prevented this email from being sent.
-    InboundEmailDetails:
+    OutboundEmailDetails:
       type: object
       properties:
-        inbound_email_details:
+        outbound_email_details:
           allOf:
           - type: object
-            description: Details about an inbound email.
+            description: Details about an outbound email.
             properties:
-              received_time:
+              send_time:
                 type: string
                 format: date-time
-                description: The time that the email was received by the delivering mail server in UTC.
-              urls:
-                type: array
-                items:
-                  type: string
-                description: The URLs extracted from the email.
+                description: The time that the email was sent or a send attempt was made in UTC.
+              tessian_action:
+                type: string
+                enum:
+                - WARN
+                - BLOCK
+                - SILENTLY_TRACK
+                description: 'The action Tessian took when the user tried to send the email. If multiple modules triggered, the action might be the result of another module (i.e. not the module described by this event).
+
+                  '
             required:
-            - received_time
-            - urls
+            - send_time
+            - tessian_action
           - $ref: '#/components/schemas/BaseEmailDetails'
       required:
-      - inbound_email_details
-    DomainMember:
+      - outbound_email_details
+    GroupMetadata:
       type: object
-      additionalProperties: false
+      description: 'Information about a group.
+
+        '
       required:
-      - domain
+      - name
       properties:
-        domain:
+        name:
           type: string
-          pattern: ^@.+
-    AddressMember:
-      type: object
-      additionalProperties: false
-      required:
-      - address
-      properties:
-        address:
-          type: string
-          format: email
-          pattern: ^(?!@).+
+        id:
+          type: integer
+        created_at:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        updated_at:
+          type:
+          - string
+          - 'null'
+          readOnly: true
     Anomaly:
       type: object
       additionalProperties: false
@@ -2110,6 +1982,134 @@ components:
             The format of checkpoints might change in the future. They should not be used for comparing or ordering anomalies.
 
             '
+    InboundEmailDetails:
+      type: object
+      properties:
+        inbound_email_details:
+          allOf:
+          - type: object
+            description: Details about an inbound email.
+            properties:
+              received_time:
+                type: string
+                format: date-time
+                description: The time that the email was received by the delivering mail server in UTC.
+              urls:
+                type: array
+                items:
+                  type: string
+                description: The URLs extracted from the email.
+            required:
+            - received_time
+            - urls
+          - $ref: '#/components/schemas/BaseEmailDetails'
+      required:
+      - inbound_email_details
+    GuardianTrigger:
+      description: Represents a trigger for the Guardian module
+      allOf:
+      - $ref: '#/components/schemas/OutboundTrigger'
+      - type: object
+        properties:
+          module:
+            type: string
+            description: The module name
+            enum:
+            - guardian
+          guardian_event_type:
+            type: string
+            description: The type of the guardian trigger event.
+            enum:
+            - misdirected_email
+            - misattached_file
+          misdirected_email_prevented:
+            type: boolean
+            description: True if Guardian prevented this email from being sent due to being flagged as misdirected.
+            example: true
+          flag_reason:
+            type: string
+            description: The reason that Guardian flagged this email as being misdirected.
+          anomalous_recipient:
+            type: string
+            description: The recipient email address that Guardian has identified as being a possible mistake.
+            example: example2@example.com
+          suggested_recipient:
+            type: string
+            description: The recipient that Guardian thinks the user should be sending the email to, based on the user's historical relationship with the suggested recipient.
+            example: example3@example.com
+          misattached_file_prevented:
+            type: boolean
+            description: True if Guardian prevented this email from being sent due to being flagged as having a misattached file.
+            example: false
+          misattached_file_reasons:
+            type: array
+            items:
+              type: string
+            description: The reasons that Guardian thinks this email has misattached files.
+          anomalous_attachments:
+            type: array
+            items:
+              type: string
+            description: The email attachment names that Guardian has identified as being misattached.
+            example:
+            - project_483_document.pdf
+    Links:
+      description: Contains URLs that are associated with this event.
+      type: object
+      properties:
+        portal_url:
+          description: The address on the portal where further information related to this event can be viewed.
+          type:
+          - string
+          - 'null'
+          format: url
+          example: https://example.tessian-platform.com/0/anomalies/916ab7bb-efa2-4b61-b7f3-7f45fb9c8f72
+      additionalProperties: false
+    BaseEvent:
+      type: object
+      description: Properties that all events have.
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the event.
+        type:
+          type: string
+          description: The type of event.
+        created_at:
+          type: string
+          format: date-time
+          description: When the event was created in UTC.
+        updated_at:
+          type: string
+          format: date-time
+          description: When the event was last updated in UTC. Creation is counted as an update.
+        portal_link:
+          type:
+          - string
+          - 'null'
+          format: url
+          description: 'A HTTP link to the Tessian portal where further information about to this event can be viewed.
+
+            '
+      required:
+      - id
+      - type
+      - created_at
+      - updated_at
+      - portal_link
+    GroupMembers:
+      description: 'Input members data for adding/removing members from group,
+
+        expects one of `address` or `domain`
+
+        '
+      type: array
+      minItems: 1
+      maxItems: 100
+      items:
+        oneOf:
+        - $ref: '#/components/schemas/AddressMember'
+        - $ref: '#/components/schemas/DomainMember'
 x-tagGroups:
 - name: Endpoints
   tags:
