@@ -1,0 +1,12 @@
+{
+ "url": "https://assets.tessian.com/docs/openapi.json",
+ "requested_url": "https://assets.tessian.com/docs/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 129605,
+ "sha256": "b2abd5b21f5bb117be9b5aca771ab86199e3469d8eab8a3854efd2f38b8a9371",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
