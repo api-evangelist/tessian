@@ -64,6 +64,122 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Tessian is a company surfaced as a portfolio company of accel, balderton-capital and added to the API Evangelist network as a stub for enrichment. Sector: enterprise. This profile is a lead awaiting the enrichment pipeline.
+Tessian, now part of Proofpoint, is an AI-powered email security platform that protects against inbound threats (phishing and impersonation), accidental data loss, and deliberate data exfiltration across its Defender, Guardian, Enforcer, Architect, and Constructor modules. The Tessian API is a RESTful, JSON, read-oriented interface that exports security-event, anomaly, company-risk, user-monitoring, audit-log, and trigger data into SIEMs and other data-management tools. It authenticates with a static API token, paginates by checkpoint, and returns ISO 8601 UTC timestamps.
 
-Backed by: accel, balderton-capital — http://www.tessian.com
+**Areas:** Company · Enterprise · Email Security · Cybersecurity · Data Loss Prevention · SIEM · Security · Phishing
+
+## Tessian on APIs.io
+
+Everything profiled for Tessian is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/tessian/](https://apis.io/providers/tessian/)** — or go straight to one of the APIs or properties below.
+
+### APIs (2)
+
+- [Tessian Beta Endpoints API](https://apis.io/apis/tessian/tessian-beta-endpoints-api/) — The Beta Endpoints API from Tessian — 1 operation(s) for beta endpoints.
+- [Tessian Endpoints API](https://apis.io/apis/tessian/tessian-endpoints-api/) — The Endpoints API from Tessian — 9 operation(s) for endpoints.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [tessian](https://apis.io/servers/tessian/tessian/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Tessian Agentic Access](https://apis.io/agentic-access/tessian/tessian-agentic-access/)
+
+#### Collections (10)
+
+Postman and Open Collection request collections.
+
+- [Tessian Anomalies API](https://apis.io/collections/tessian/open-tessian-anomalies-api/)
+- [Tessian Anomalies Audits API](https://apis.io/collections/tessian/open-tessian-audits-api/)
+- [Tessian Anomalies Beta Endpoints API](https://apis.io/collections/tessian/open-tessian-beta-endpoints-api/)
+- [Tessian Anomalies Deprecated API](https://apis.io/collections/tessian/open-tessian-deprecated-api/)
+- [Tessian Anomalies Endpoints API](https://apis.io/collections/tessian/open-tessian-endpoints-api/)
+- [Tessian Anomalies Events API](https://apis.io/collections/tessian/open-tessian-events-api/)
+- [Tessian Anomalies Groups API](https://apis.io/collections/tessian/open-tessian-groups-api/)
+- [Tessian Anomalies Monitoring API](https://apis.io/collections/tessian/open-tessian-monitoring-api/)
+- [Tessian Anomalies Risk API](https://apis.io/collections/tessian/open-tessian-risk-api/)
+- [Tessian Anomalies Triggers API](https://apis.io/collections/tessian/open-tessian-triggers-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Tessian Openapi Overlay](https://apis.io/overlays/tessian/tessian-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Tessian Authentication](https://apis.io/security/tessian/tessian-authentication/)
+- [Tessian Domain Security](https://apis.io/security/tessian/tessian-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.tessian.com)
+- [Documentation](https://developer.tessian.com/documentation/api/index.html)
+- [API reference](https://developer.tessian.com/documentation/api/index.html)
+- [Terms of service](https://www.proofpoint.com/us/legal/api-terms-of-use)
+- [GitHub](https://github.com/tessian)
+
+## API Evangelist rating
+
+**Kin Score 31.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 47.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 44.6 |
+| Access clarity | 10.5 |
+
+**Agent readiness 23.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/tessian/](https://apis.io/providers/tessian/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Tessian: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/tessian/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
